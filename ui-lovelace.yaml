@@ -1,0 +1,224 @@
+title: De Hofstee 18
+views:
+  - path: home
+    icon: mdi:home-assistant
+    cards:
+      - type: vertical-stack
+        cards:
+          - type: picture-glance
+            camera_image: camera.voor
+            entities:
+              - camera.voor
+              - entity: binary_sensor.door_window_sensor_158d00022daba6
+                icon: mdi:door-open
+          - type: history-graph
+            hours_to_show: 2
+            entities:
+              - camera.voor
+          - type: markdown
+            content: >
+              [Naar Zoneminder](http://home.royduineveld.nl/zm)
+  - path: verlichting
+    icon: mdi:lightbulb
+    title: Verlichting
+    cards:
+      - type: entities
+        entities:
+          - entity: light.alles
+            name: Alles
+            icon: mdi:brightness-4
+          - type: divider
+          - entity: light.bank
+            icon: mdi:sofa
+          - entity: light.verlichting_hal
+            name: Hal
+            icon: mdi:door
+          - type: divider
+          - entity: light.overloop
+            name: Overloop
+            icon: mdi:stairs
+          - entity: light.slaapkamer
+            name: Slaapkamer
+            icon: mdi:bed-empty
+          - entity: light.tradfri_light7e2145520440005e65551
+            name: Kledingkast
+            icon: mdi:tshirt-crew
+          - entity: light.logeerkamer
+            name: Logeerkamer
+            icon: mdi:hotel
+          - type: divider
+          - entity: light.verlichting_zolder
+            name: Zolder
+            icon: mdi:washing-machine
+          - entity: light.verlichting_batcave
+            name: Batcave
+            icon: mdi:bat
+      - type: vertical-stack
+        cards:
+          - type: entities
+            title: Woonkamer
+            entities:
+              - light.bank
+              - light.gateway_light_7811dcded48c
+          - type: entities
+            title: Hal
+            show_header_toggle: false
+            entities:
+              - entity: light.verlichting_hal
+                name: Alle 3
+              - light.deur
+              - light.kapstok
+              - light.trap
+      - type: vertical-stack
+        cards:
+          - type: entities
+            title: Boven
+            show_header_toggle: false
+            entities:
+              - light.overloop
+              - light.slaapkamer
+              - light.logeerkamer
+              - light.tradfri_light7e2145520440005e65551
+      - type: vertical-stack
+        cards:
+          - type: entities
+            title: Zolder
+            show_header_toggle: false
+            entities:
+              - entity: light.verlichting_zolder
+                name: Alle 3
+              - light.droger
+              - light.hoek
+              - light.kastje
+          - type: entities
+            title: Batcave
+            show_header_toggle: false
+            entities:
+              - entity: light.verlichting_batcave
+                name: Alle 3
+              - light.bureau
+              - light.kastjes
+              - light.muur
+  - path: klimaat
+    icon: mdi:thermometer
+    title: Klimaat
+    cards:
+      - type: thermostat
+        entity: climate.woonkamer
+      - type: entities
+        entities:
+          - climate.woonkamer
+          - sensor.temperature_158d00027308f7
+          - sensor.temperature_158d000272fed0
+  - path: alarm
+    icon: mdi:bell
+    title: Alarm
+    cards:
+      - type: alarm-panel
+        entity: alarm_control_panel.ha_alarm
+      - type: vertical-stack
+        cards:
+        - type: entities
+          entities:
+            - entity: binary_sensor.door_window_sensor_158d00022daba6
+              icon: mdi:door
+            - entity: binary_sensor.door_window_sensor_158d0002518b9d
+              icon: mdi:door
+            - entity: binary_sensor.door_window_sensor_158d00027502b6
+              icon: mdi:window-closed
+            - entity: binary_sensor.door_window_sensor_158d0002bf9d5c
+              icon: mdi:window-closed
+        - type: entities
+          entities:
+            - binary_sensor.motion_sensor_158d0002b48e7e
+            - binary_sensor.motion_sensor_158d0002b5d5d1
+            - binary_sensor.motion_sensor_158d0002b4331f
+        - type: entities
+          entities:
+            - binary_sensor.water_leak_sensor_158d00023a4bcf
+  - path: multimedia
+    icon: mdi:youtube-tv
+    title: Multimedia
+    badges:
+      - sensor.plex_home
+      - sensor.plex_server
+    cards:
+      - type: media-control
+        entity: media_player.chromecast_rm
+      - type: media-control
+        entity: media_player.googlehome5965
+      - type: media-control
+        entity: media_player.batcave
+  - path: batterijen
+    icon: mdi:battery
+    title: Batterijen
+    cards:
+      - type: entities
+        entities:
+          - sensor.tradfri_remote_control
+  - path: schoonmaak
+    icon: mdi:broom
+    title: Schoonmaak
+    cards:
+      - type: entities
+        entities:
+          - vacuum.berta
+          - entity: switch.wasmachine
+            icon: mdi:washing-machine
+          - entity: switch.droger
+            icon: mdi:tumble-dryer
+      - type: horizontal-stack
+        cards:
+          - type: gauge
+            entity: sensor.wasmachine_watts
+            title: Wasmachine
+            max: 3680
+            severity:
+              green: 0
+              yellow: 1000
+              red: 3000
+          - type: gauge
+            entity: sensor.droger_watts
+            title: Droger
+            max: 3680
+            severity:
+              green: 0
+              yellow: 1000
+              red: 3000
+  - path: lokatie
+    icon: mdi:map-marker
+    title: Lokatie
+    cards:
+      - type: glance
+        entities:
+        - device_tracker.google_maps_109661945099680068664
+        - device_tracker.google_maps_117696366411650505303
+      - type: map
+        entities:
+        - device_tracker.google_maps_109661945099680068664
+        - device_tracker.google_maps_117696366411650505303
+        default_zoom: 12
+  - path: weer
+    icon: mdi:weather-cloudy
+    title: weer
+    badges:
+      - sun.sun
+      - sensor.yr_symbol
+    cards:
+      - type: weather-forecast
+        entity: weather.br_unknown_station
+  - path: planten
+    icon: mdi:flower
+    title: Planten
+    cards:
+      - type: vertical-stack
+        cards:
+          - type: plant-status
+            entity: plant.plant_1
+            name: Plant hoek
+          - type: plant-status
+            entity: plant.plant_2
+            name: Plant achterraam
+          - type: plant-status
+            entity: plant.plant_3
+            name: Plant voorraam

@@ -1,0 +1,343 @@
+- id: licht-hal-aan-wanneer-donker-en-voordeuropen
+  alias: Licht hal aan wanneer zon onder en voordeur open (B1)
+  trigger:
+  - entity_id: binary_sensor.door_window_sensor_158d00022daba6
+    from: 'off'
+    platform: state
+    to: 'on'
+  condition:
+  - after: sunset
+    condition: sun
+  action:
+  - data:
+      brightness: 1
+      entity_id: light.verlichting_hal
+    service: light.turn_on
+- id: '1536696817398'
+  alias: Licht hal uit 1 minuut na het sluiten van de deur en geen beweging
+  trigger:
+  - entity_id: binary_sensor.door_window_sensor_158d00022daba6
+    from: 'on'
+    platform: state
+    to: 'off'
+  condition:
+  - condition: state
+    entity_id: light.verlichting_hal
+    state: 'on'
+  action:
+  - delay: 00:01:00
+  - condition: state
+    entity_id: binary_sensor.motion_sensor_158d0002b48e7e
+    state: 'off'
+  - alias: ''
+    data:
+      entity_id: light.verlichting_hal
+    service: light.turn_off
+- id: '1538240319961'
+  alias: Verlichting kast dimmen wanneer zon onder
+  trigger:
+  - event: sunset
+    platform: sun
+  condition: []
+  action:
+  - data:
+      brightness: 1
+      entity_id: light.tradfri_light7e2145520440005e65551
+    service: light.turn_on
+- id: '1538240383674'
+  alias: Verlichting kast maximaal overdag
+  trigger:
+  - event: sunrise
+    platform: sun
+  condition: []
+  action:
+  - data:
+      brightness: 254
+      entity_id: light.tradfri_light7e2145520440005e65551
+    service: light.turn_on
+- id: '1540227259824'
+  alias: Kachel uit om 23:00
+  trigger:
+  - at: '23:00:00'
+    platform: time
+  condition: []
+  action:
+  - data:
+      temperature: 14
+    service: climate.set_temperature
+- id: '1540237348340'
+  alias: Licht hal aan klik switch (B254)
+  trigger:
+  - event_data:
+      entity_id: binary_sensor.switch_158d000128890e
+    event_type: xiaomi_aqara.click
+    platform: event
+  condition:
+  - condition: state
+    entity_id: light.verlichting_hal
+    state: 'off'
+  action:
+  - data:
+      brightness: 254
+      entity_id: light.verlichting_hal
+    service: light.turn_on
+  - data:
+      entity_id: automation.licht_hal_aan_wanneer_donker_overdag_en_beweging_hal_b150,
+        automation.licht_hal_aan_wanneer_zon_onder_en_beweging_hal_b1, automation.licht_hal_aan_wanneer_zon_onder_en_voordeur_open_b1,
+        automation.licht_hal_uit_1_minuut_na_het_sluiten_van_de_deur_en_geen_beweging,
+        automation.licht_hal_uit_wanneer_geen_beweging_meer_en_deur_dicht
+    service: automation.turn_off
+- id: '1540237720547'
+  alias: Licht hal uit klik switch
+  trigger:
+  - event_data:
+      entity_id: binary_sensor.switch_158d000128890e
+    event_type: xiaomi_aqara.click
+    platform: event
+  condition:
+  - condition: state
+    entity_id: light.verlichting_hal
+    state: 'on'
+  action:
+  - data:
+      entity_id: light.verlichting_hal
+    service: light.turn_off
+  - data:
+      entity_id: automation.licht_hal_aan_wanneer_donker_overdag_en_beweging_hal_b150,
+        automation.licht_hal_aan_wanneer_zon_onder_en_beweging_hal_b1, automation.licht_hal_aan_wanneer_zon_onder_en_voordeur_open_b1,
+        automation.licht_hal_uit_1_minuut_na_het_sluiten_van_de_deur_en_geen_beweging,
+        automation.licht_hal_uit_wanneer_geen_beweging_meer_en_deur_dicht
+    service: automation.turn_on
+- id: '1540324614249'
+  alias: Licht hal aan wanneer donker overdag en beweging hal (B150)
+  trigger:
+  - entity_id: binary_sensor.motion_sensor_158d0002b48e7e
+    from: 'off'
+    platform: state
+    to: 'on'
+  condition:
+  - below: '10'
+    condition: numeric_state
+    entity_id: sensor.illumination_158d0002b48e7e
+  - before: sunset
+    condition: sun
+  action:
+  - data:
+      brightness: 150
+      entity_id: light.verlichting_hal
+    service: light.turn_on
+- id: '1540395671321'
+  alias: Licht hal aan wanneer zon onder en beweging hal (B1)
+  trigger:
+  - entity_id: binary_sensor.motion_sensor_158d0002b48e7e
+    from: 'off'
+    platform: state
+    to: 'on'
+  condition:
+  - after: sunset
+    condition: sun
+  action:
+  - data:
+      brightness: 1
+      entity_id: light.verlichting_hal
+    service: light.turn_on
+- id: '1540458454993'
+  alias: Berta stofzuigen woensdag en vrijdag om 10:00 niemand thuis
+  trigger:
+  - at: '10:00:00'
+    platform: time
+  condition:
+  - condition: time
+    weekday:
+    - wed
+    - fri
+  - condition: state
+    entity_id: group.all_devices
+    state: not_home
+  action:
+  - service: vacuum.start
+- id: '1540835022257'
+  alias: Licht hal uit wanneer geen beweging meer en deur dicht
+  trigger:
+  - entity_id: binary_sensor.motion_sensor_158d0002b48e7e
+    from: 'on'
+    platform: state
+    to: 'off'
+  condition:
+  - condition: state
+    entity_id: binary_sensor.door_window_sensor_158d00022daba6
+    state: 'off'
+  action:
+  - alias: ''
+    data:
+      entity_id: light.verlichting_hal
+    service: light.turn_off
+- id: '1540843281679'
+  alias: Notificatie wanneer wasmachine lekt
+  trigger:
+  - entity_id: binary_sensor.water_leak_sensor_158d00023a4bcf
+    from: 'off'
+    platform: state
+    to: 'on'
+  condition: []
+  action:
+  - data:
+      message: Ja... en nu?
+      title: Wasmachine lekt!
+    service: notify.notify
+- id: '1540843447189'
+  alias: Notificatie wanneer voordeur open en niemand thuis
+  trigger:
+  - entity_id: binary_sensor.door_window_sensor_158d00022daba6
+    from: 'off'
+    platform: state
+    to: 'on'
+  condition:
+  - condition: state
+    entity_id: group.all_devices
+    state: not_home
+  action:
+  - data:
+      message: En er is niemand thuis...
+      title: De voordeur is open!
+    service: notify.notify
+- id: '1541167496602'
+  alias: Kachel uit wanneer allebei weg voor minimaal 15 minuten
+  trigger:
+  - entity_id: group.all_devices
+    for: 00:15:00
+    from: home
+    platform: state
+    to: not_home
+  condition: []
+  action:
+  - data:
+      temperature: 14
+    service: climate.set_temperature
+- id: '1542568575113'
+  alias: Licht slaapkamer aan klik switch (B1)
+  trigger:
+  - event_data:
+      click_type: single
+      entity_id: binary_sensor.switch_158d0001101f75
+    event_type: xiaomi_aqara.click
+    platform: event
+  condition:
+  - condition: state
+    entity_id: light.slaapkamer
+    state: 'off'
+  action:
+  - data:
+      brightness: 1
+      entity_id: light.slaapkamer
+    service: light.turn_on
+- id: '1542568632003'
+  alias: Licht slaapkamer uit klik switch
+  trigger:
+  - event_data:
+      click_type: single
+      entity_id: binary_sensor.switch_158d0001101f75
+    event_type: xiaomi_aqara.click
+    platform: event
+  condition:
+  - condition: state
+    entity_id: light.slaapkamer
+    state: 'on'
+  action:
+  - data:
+      entity_id: light.slaapkamer
+    service: light.turn_off
+- id: '1542629522199'
+  alias: Licht slaapkamer aan dubbel klik switch (B254)
+  trigger:
+  - event_data:
+      click_type: double
+      entity_id: binary_sensor.switch_158d0001101f75
+    event_type: xiaomi_aqara.click
+    platform: event
+  condition: []
+  action:
+  - data:
+      brightness: 254
+      entity_id: light.slaapkamer
+    service: light.turn_on
+- id: '1542655741962'
+  alias: Licht bank aan wanneer zon onder en niet thuis (B1)
+  trigger:
+  - event: sunset
+    platform: sun
+  condition:
+  - condition: state
+    entity_id: group.all_devices
+    state: not_home
+  action:
+  - data:
+      brightness: 1
+      entity_id: light.bank
+    service: light.turn_on
+- id: '1542656422872'
+  alias: Licht bank aan wanneer we weg gaan en zon onder (B1)
+  trigger:
+  - entity_id: group.all_devices
+    platform: state
+    to: not_home
+  condition:
+  - after: sunset
+    condition: sun
+  action:
+  - data:
+      brightness: 1
+      entity_id: light.bank
+    service: light.turn_on
+- id: '1542657069365'
+  alias: Licht bank uit om 0:00
+  trigger:
+  - at: 0:00:00
+    platform: time
+  condition: []
+  action:
+  - data:
+      entity_id: light.bank
+    service: light.turn_off
+- id: '1542830579886'
+  alias: Notificatie wanneer achterdeur open en niemand thuis
+  trigger:
+  - entity_id: binary_sensor.door_window_sensor_158d0002518b9d
+    from: 'off'
+    platform: state
+    to: 'on'
+  condition:
+  - condition: state
+    entity_id: group.all_devices
+    state: not_home
+  action:
+  - data:
+      message: En er is niemand thuis...
+      title: De achterdeur is open!
+    service: notify.notify
+- id: '1545053194741'
+  alias: Notificatie wanneer wasmachine klaar
+  trigger:
+  - above: '0.5'
+    below: '1.5'
+    entity_id: sensor.wasmachine_watts
+    platform: numeric_state
+  condition: []
+  action:
+  - data:
+      message: Hoppa... de droger in die zooi!
+      title: Wasmachine klaar!
+    service: notify.notify
+- id: '1545057524247'
+  alias: Notificatie wanneer droger klaar
+  trigger:
+  - above: '0.5'
+    below: '1.5'
+    entity_id: sensor.droger_watts
+    platform: numeric_state
+  condition: []
+  action:
+  - data:
+      message: Nu opvouwen... :(
+      title: Droger klaar!
+    service: notify.notify

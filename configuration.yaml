@@ -1,0 +1,284 @@
+homeassistant:
+  # Name of the location where Home Assistant is running
+  name: Home
+  # Location required to calculate the time the sun rises and sets
+  latitude: !secret latitude
+  longitude: !secret longitude
+  # Impacts weather/sunrise data (altitude above sea level in meters)
+  elevation: 0
+  # metric for Metric, imperial for Imperial
+  unit_system: metric
+  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  time_zone: Europe/Amsterdam
+  # Customization file
+  customize: !include customize.yaml
+  # Packages
+  # packages: !include_dir_named packages
+
+# Show links to resources in log and frontend
+# introduction:
+
+# Enables the frontend
+frontend:
+
+# Lovelace
+lovelace:
+  mode: yaml
+
+# Enables configuration UI
+config:
+
+http:
+  # Secrets are defined in the file secrets.yaml
+  # api_password: !secret http_password
+  # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
+  # base_url: example.duckdns.org:8123
+
+# Checks for available updates
+# Note: This component will send some information about your system to
+# the developers to assist with development of Home Assistant.
+# For more information, please see:
+# https://home-assistant.io/blog/2016/10/25/explaining-the-updater/
+updater:
+  # Optional, allows Home Assistant developers to focus on popular components.
+  # include_used_components: true
+
+# Discover some devices automatically
+discovery:
+
+# Allows you to issue voice commands from the frontend in enabled browsers
+conversation:
+
+# Enables support for tracking state changes over time
+history:
+
+# View all events in a logbook
+logbook:
+
+# Enables a map showing the location of tracked devices
+map:
+
+# Track the sun
+sun:
+
+# Text to speech
+tts:
+  - platform: google
+    language: 'nl'
+
+# Cloud
+cloud:
+
+# Xiaomi
+xiaomi_aqara:
+  discovery_retry: 5
+  gateways:
+    - key: !secret xiaomi_aqara_gateway_key
+
+# Asus router
+asuswrt:
+  host: !secret asuswrt_host
+  username: !secret asuswrt_username
+  password: !secret asuswrt_password
+device_tracker:
+  - platform: asuswrt
+    track_new_devices: False
+  - platform: google_maps
+    username: !secret google_username
+    password: !secret google_password
+    max_gps_accuracy: 100
+
+# Zones
+zone:
+  - name: justbetter
+    latitude: !secret justbetter_latitude
+    longitude: !secret justbetter_longitude
+    icon: mdi:office-building
+  - name: kapsalon
+    latitude: !secret kapsalon_latitude
+    longitude: !secret kapsalon_longitude
+    icon: mdi:content-cut
+
+# ZoneMinder
+zoneminder:
+  host: !secret zoneminder_host
+  username: !secret zoneminder_username
+  password: !secret zoneminder_password
+camera:
+  - platform: zoneminder
+
+climate:
+  # InComfort
+  - platform: InComfort
+    name: Woonkamer
+    host: !secret incomfort_host
+
+sensor:
+  # Plex server
+  - platform: plex
+    name: Plex server
+    host: !secret plex_host_remote
+    username: !secret plex_username
+    password: !secret plex_password
+  # Plex home
+  - platform: plex
+    name: Plex home
+    host: !secret plex_host_home
+    username: !secret plex_username
+    password: !secret plex_password
+  # Weer
+  - platform: yr
+  # PostNL
+  - platform: postnl
+    name: PostNL
+    username: !secret postnl_username
+    password: !secret postnl_password
+  # Xiaomi Flower Care (also see the "plant" configuration)
+  - platform: miflora
+    name: plant 1
+    mac: 'C4:7C:8D:67:3F:51'
+  - platform: miflora
+    name: plant 2
+    mac: 'C4:7C:8D:67:3E:BB'
+  - platform: miflora
+    name: plant 3
+    mac: 'C4:7C:8D:67:3E:12'
+  # Droger
+  - platform: template
+    sensors:
+      droger_amps:
+        friendly_name_template: "{{ states.switch.droger.name}} amperage"
+        value_template: '{{ states.switch.droger.attributes["current_a"] | float }}'
+        unit_of_measurement: 'A'
+      droger_watts:
+        friendly_name_template: "{{ states.switch.droger.name}} wattage"
+        value_template: '{{ states.switch.droger.attributes["current_power_w"] | float }}'
+        unit_of_measurement: 'W'
+      droger_total_kwh:
+        friendly_name_template: "{{ states.switch.droger.name}} totaal"
+        value_template: '{{ states.switch.droger.attributes["total_energy_kwh"] | float }}'
+        unit_of_measurement: 'kWh'
+      droger_volts:
+        friendly_name_template: "{{ states.switch.droger.name}} voltage"
+        value_template: '{{ states.switch.droger.attributes["voltage"] | float }}'
+        unit_of_measurement: 'V'
+      droger_today_kwh:
+        friendly_name_template: "{{ states.switch.droger.name}} vandaag"
+        value_template: '{{ states.switch.droger.attributes["today_energy_kwh"] | float }}'
+        unit_of_measurement: 'kWh'
+  # Wasmachine
+  - platform: template
+    sensors:
+      wasmachine_amps:
+        friendly_name_template: "{{ states.switch.wasmachine.name}} amperage"
+        value_template: '{{ states.switch.wasmachine.attributes["current_a"] | float }}'
+        unit_of_measurement: 'A'
+      wasmachine_watts:
+        friendly_name_template: "{{ states.switch.wasmachine.name}} wattage"
+        value_template: '{{ states.switch.wasmachine.attributes["current_power_w"] | float }}'
+        unit_of_measurement: 'W'
+      wasmachine_total_kwh:
+        friendly_name_template: "{{ states.switch.wasmachine.name}} totaal"
+        value_template: '{{ states.switch.wasmachine.attributes["total_energy_kwh"] | float }}'
+        unit_of_measurement: 'kWh'
+      wasmachine_volts:
+        friendly_name_template: "{{ states.switch.wasmachine.name}} voltage"
+        value_template: '{{ states.switch.wasmachine.attributes["voltage"] | float }}'
+        unit_of_measurement: 'V'
+      wasmachine_today_kwh:
+        friendly_name_template: "{{ states.switch.wasmachine.name}} vandaag"
+        value_template: '{{ states.switch.wasmachine.attributes["today_energy_kwh"] | float }}'
+        unit_of_measurement: 'kWh'
+
+# Xiaomi Flower Care (also see the "sensor" configuration)
+plant:
+  plant_1:
+    sensors:
+      moisture: sensor.plant_1_moisture
+      battery: sensor.plant_1_battery
+      temperature: sensor.plant_1_temperature
+      conductivity: sensor.plant_1_conductivity
+      brightness: sensor.plant_1_light_intensity
+  plant_2:
+    sensors:
+      moisture: sensor.plant_2_moisture
+      battery: sensor.plant_2_battery
+      temperature: sensor.plant_2_temperature
+      conductivity: sensor.plant_2_conductivity
+      brightness: sensor.plant_2_light_intensity
+  plant_3:
+    sensors:
+      moisture: sensor.plant_3_moisture
+      battery: sensor.plant_3_battery
+      temperature: sensor.plant_3_temperature
+      conductivity: sensor.plant_3_conductivity
+      brightness: sensor.plant_3_light_intensity
+
+# Light groups
+light:
+  - platform: group
+    name: Alles
+    entities:
+      - light.bank
+      - light.gateway_light_7811dcded48c
+      - light.verlichting_hal
+      - light.overloop
+      - light.slaapkamer
+      - light.logeerkamer
+      - light.verlichting_zolder
+      - light.verlichting_batcave
+  - platform: group
+    name: Verlichting hal
+    entities:
+      - light.deur
+      - light.kapstok
+      - light.trap
+  - platform: group
+    name: Verlichting Batcave
+    entities:
+      - light.bureau
+      - light.kastjes
+      - light.muur
+  - platform: group
+    name: Verlichting zolder
+    entities:
+      - light.droger
+      - light.hoek
+      - light.kastje
+
+# Xiaomi Vacuum
+vacuum:
+  - platform: xiaomi_miio
+    name: Berta
+    host: !secret berta_host
+    token: !secret berta_token
+
+# Pushover Notifications
+notify:
+   - platform: pushover
+     api_key: !secret pushover_api_key
+     user_key: !secret pushover_user_key
+
+# Buienradar
+weather:
+  - platform: buienradar
+
+# Alarm
+alarm_control_panel:
+  - platform: manual
+    code: 1234
+
+# Switch
+switch:
+  - platform: tplink
+    name: Droger
+    host: 192.168.1.7
+    enable_leds: false
+  - platform: tplink
+    name: Wasmachine
+    host: 192.168.1.8
+    enable_leds: false
+
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml
