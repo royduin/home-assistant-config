@@ -6,14 +6,14 @@ I started with Home Assistant on my Ubuntu home server in August 2018 and moved 
 
 - Ikea Trådfri lights 
   - 13 bulbs
-  - 1 closed light hub
+  - 1 closet light hub
 - Xiaomi Hub
   - 4 door/window sensors
   - 3 motion sensors
   - 2 switches
   - 2 temperature sensors
   - 1 water sensor
-  - 1 cube
+  - 1 magic cube
 - Asus RT-AC68U (presence detection)
 - ZoneMinder
   - 2 Hikvision cameras
@@ -27,6 +27,7 @@ I started with Home Assistant on my Ubuntu home server in August 2018 and moved 
 ## TODO
 
 ### Software
+- Add the Intergas InComfort module as GIT submodule
 - Automations for the motion sensor at the stairs
 - Low battery notifications
 - Vacation mode
