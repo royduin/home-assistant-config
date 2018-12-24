@@ -335,7 +335,14 @@
     below: '1.5'
     entity_id: sensor.droger_watts
     platform: numeric_state
-  condition: []
+  condition:
+    - condition: template
+      value_template: >
+        {%- if states.automation.notificatie_wanneer_droger_klaar.attributes ["last_triggered"] -%}
+          {{ (as_timestamp(now()) - as_timestamp(states.automation.notificatie_wanneer_droger_klaar.attributes ["last_triggered"])) > 1800 }}
+        {%- else -%}
+          True
+        {%- endif -%}
   action:
   - data:
       message: Nu opvouwen... :(
