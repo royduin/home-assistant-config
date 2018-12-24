@@ -336,15 +336,50 @@
     entity_id: sensor.droger_watts
     platform: numeric_state
   condition:
-    - condition: template
-      value_template: >
-        {%- if states.automation.notificatie_wanneer_droger_klaar.attributes ["last_triggered"] -%}
-          {{ (as_timestamp(now()) - as_timestamp(states.automation.notificatie_wanneer_droger_klaar.attributes ["last_triggered"])) > 1800 }}
-        {%- else -%}
-          True
-        {%- endif -%}
+  - condition: template
+    value_template: "{%- if states.automation.notificatie_wanneer_droger_klaar.attributes\
+      \ [\"last_triggered\"] -%}\n  {{ (as_timestamp(now()) - as_timestamp(states.automation.notificatie_wanneer_droger_klaar.attributes\
+      \ [\"last_triggered\"])) > 1800 }}\n{%- else -%}\n  True\n{%- endif -%}\n"
   action:
   - data:
       message: Nu opvouwen... :(
       title: Droger klaar!
+    service: notify.notify
+- id: '1545660750751'
+  alias: Notificatie wanneer kachel aan en dakraam open
+  trigger:
+  - entity_id: climate.woonkamer
+    platform: state
+    to: Verwarmen
+  condition:
+  - condition: state
+    entity_id: binary_sensor.door_window_sensor_158d0002bf9d5c
+    state: 'on'
+  - condition: template
+    value_template: "{%- if states.climate.woonkamer.attributes[\"temperature\"] -%}\n\
+      \  {{ states.climate.woonkamer.attributes[\"temperature\"] > 15 }}\n{%- else\
+      \ -%}\n  True\n{%- endif -%}\n"
+  action:
+  - data:
+      message: En de kachel staat aan...
+      title: Dakraam staat nog open
+    service: notify.notify
+- id: '1545660810235'
+  alias: Notificatie wanneer kachel aan en badkamer raam open
+  trigger:
+  - entity_id: climate.woonkamer
+    platform: state
+    to: Verwarmen
+  condition:
+  - condition: state
+    entity_id: binary_sensor.door_window_sensor_158d00027502b6
+    state: 'on'
+  - condition: template
+    value_template: "{%- if states.climate.woonkamer.attributes[\"temperature\"] -%}\n\
+      \  {{ states.climate.woonkamer.attributes[\"temperature\"] > 15 }}\n{%- else\
+      \ -%}\n  True\n{%- endif -%}\n"
+  action:
+  - data:
+      message: En de kachel staat aan...
+      title: Badkamer raam staat nog open
     service: notify.notify
