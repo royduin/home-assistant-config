@@ -127,7 +127,12 @@ sensor:
     username: !secret plex_username
     password: !secret plex_password
   # Weer
-  - platform: yr
+  - platform: buienradar
+    monitored_conditions:
+      - condition
+      - conditiondetailed
+      - symbol
+      - temperature
   # PostNL
   - platform: postnl
     name: PostNL
