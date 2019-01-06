@@ -8,7 +8,7 @@ I started with Home Assistant on my Ubuntu home server in August 2018 and moved 
   - 13 bulbs
   - 1 closet light hub
 - Xiaomi Hub
-  - 4 door/window sensors
+  - 5 door/window sensors
   - 3 motion sensors
   - 2 switches
   - 2 temperature sensors
