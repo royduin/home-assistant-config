@@ -1,0 +1,10 @@
+'1546891798335':
+  alias: Berta naar prullenbak
+  sequence:
+  - data:
+      command: app_goto_target
+      entity_id: vacuum.berta
+      params:
+      - 23200
+      - 26000
+    service: vacuum.send_command

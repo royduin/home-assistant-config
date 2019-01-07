@@ -165,6 +165,8 @@ views:
       - type: entities
         entities:
           - vacuum.berta
+          - entity: script.1546891798335
+            icon: mdi:delete-restore
           - entity: switch.wasmachine
             icon: mdi:washing-machine
           - entity: switch.droger
