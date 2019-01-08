@@ -383,3 +383,13 @@
       message: En de kachel staat aan...
       title: Badkamer raam staat nog open
     service: notify.notify
+- id: '1546972884752'
+  alias: Standaard thema
+  trigger:
+  - event: start
+    platform: homeassistant
+  condition: []
+  action:
+  - data:
+      name: midnight
+    service: frontend.set_theme
