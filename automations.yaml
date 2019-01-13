@@ -322,12 +322,16 @@
     below: '1.5'
     entity_id: sensor.wasmachine_watts
     platform: numeric_state
-  condition: []
+  condition:
+  - condition: template
+    value_template: "{%- if states.automation.notificatie_wanneer_wasmachine_klaar.attributes\
+      \ [\"last_triggered\"] -%}\n  {{ (as_timestamp(now()) - as_timestamp(states.automation.notificatie_wanneer_wasmachine_klaar.attributes\
+      \ [\"last_triggered\"])) > 1800 }}\n{%- else -%}\n  True\n{%- endif -%}\n"
   action:
   - data:
-      message: Hoppa... de droger in die zooi!
-      title: Wasmachine klaar!
-    service: notify.notify
+      entity_id: media_player.googlehome5965
+      message: De wasmachine is klaar, hop naar boven de droger in dus
+    service: tts.google_say
 - id: '1545057524247'
   alias: Notificatie wanneer droger klaar
   trigger:
@@ -342,9 +346,9 @@
       \ [\"last_triggered\"])) > 1800 }}\n{%- else -%}\n  True\n{%- endif -%}\n"
   action:
   - data:
-      message: Nu opvouwen... :(
-      title: Droger klaar!
-    service: notify.notify
+      entity_id: media_player.googlehome5965
+      message: De droger is klaar, hop naar boven en opvouwen
+    service: tts.google_say
 - id: '1545660750751'
   alias: Notificatie wanneer kachel aan en dakraam open
   trigger:
