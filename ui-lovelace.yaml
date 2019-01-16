@@ -53,6 +53,10 @@ views:
           - entity: light.verlichting_batcave
             name: Batcave
             icon: mdi:bat
+          - type: divider
+          - entity: switch.tuin_verlichting
+            name: Tuin
+            icon: mdi:flower
       - type: vertical-stack
         cards:
           - type: entities
@@ -157,7 +161,12 @@ views:
     cards:
       - type: entities
         entities:
-          - sensor.tradfri_remote_control
+          - entity: sensor.tradfri_remote_control
+            name: Afstandsbediening bank
+            icon: mdi:remote
+          - entity: sensor.schakelaar_tuin
+            name: Afstandsbediening tuin
+            icon: mdi:remote
   - path: schoonmaak
     icon: mdi:broom
     title: Schoonmaak

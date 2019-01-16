@@ -397,3 +397,23 @@
   - data:
       name: midnight
     service: frontend.set_theme
+- id: '1547662706132'
+  alias: Licht tuin uit om 0:00
+  trigger:
+  - at: 0:00:00
+    platform: time
+  condition: []
+  action:
+  - data:
+      entity_id: switch.tuin_verlichting
+    service: switch.turn_off
+- id: '1547662845811'
+  alias: Licht tuin aan wanneer zon onder
+  trigger:
+  - event: sunset
+    platform: sun
+  condition: []
+  action:
+  - data:
+      entity_id: switch.tuin_verlichting
+    service: switch.turn_on

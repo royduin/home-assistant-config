@@ -4,9 +4,10 @@ I started with Home Assistant on my Ubuntu home server in August 2018 and moved 
 
 ## Connected devices
 
-- Ikea Trådfri lights 
+- Ikea Trådfri
   - 13 bulbs
   - 1 closet light hub
+  - 1 plug
 - Xiaomi Hub
   - 5 door/window sensors
   - 3 motion sensors
@@ -27,6 +28,7 @@ I started with Home Assistant on my Ubuntu home server in August 2018 and moved 
 ## TODO
 
 ### Software
+- Somehow add the Ikea plug into the light group
 - Automations for the motion sensor at the stairs
 - Low battery notifications
 - Vacation mode
@@ -39,4 +41,4 @@ I started with Home Assistant on my Ubuntu home server in August 2018 and moved 
 ### Hardware
 - All wall switches with pushbuttons and a Xiaomi switch inside (ordered another 8)
 - Buy and add more Ikea Trådfri lights
-- Buy and add Ikea Trådfri smart switches (eta januari 2019 in stores again)
+- Buy and add Ikea Trådfri smart switches
