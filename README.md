@@ -5,9 +5,15 @@ I started with Home Assistant on my Ubuntu home server in August 2018 and moved 
 ## Connected devices
 
 - Ikea Trådfri
-  - 13 bulbs
-  - 1 closet light hub
-  - 1 plug
+  - 2 E27 color spectrum (004.086.12)
+  - 3 E27 white spectrum (103.182.63)
+  - 1 E27 white (603.384.52)
+  - 3 GU10 white spectrum (003.182.92)
+  - 6 GU10 white (803.652.70)
+  - 1 closet lights hub (603.426.56)
+  - 4 plugs (903.561.66)
+  - 1 plug with remote (403.647.48) 
+  - 1 remote (303.388.49)
 - Xiaomi Hub
   - 5 door/window sensors
   - 3 motion sensors
@@ -28,7 +34,7 @@ I started with Home Assistant on my Ubuntu home server in August 2018 and moved 
 ## TODO
 
 ### Software
-- Somehow add the Ikea plug into the light group
+- Somehow add the Ikea plugs into the light group
 - Automations for the motion sensor at the stairs
 - Low battery notifications
 - Vacation mode
@@ -39,6 +45,5 @@ I started with Home Assistant on my Ubuntu home server in August 2018 and moved 
 - Home Cinema light modes
 
 ### Hardware
-- All wall switches with pushbuttons and a Xiaomi switch inside (ordered another 8)
-- Buy and add more Ikea Trådfri lights
-- Buy and add Ikea Trådfri smart switches
+- All wall switches with pushbuttons and a Xiaomi switch inside (got another 8)
+- Replace the 2 lights above the dining table with the colored Ikea Trådfri lights

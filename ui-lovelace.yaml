@@ -54,9 +54,12 @@ views:
             name: Batcave
             icon: mdi:bat
           - type: divider
-          - entity: switch.tuin_verlichting
+          - entity: switch.tuin_verlichting_2
             name: Tuin
             icon: mdi:flower
+          - entity: switch.tuin_verlichting
+            name: Stopcontacten
+            icon: mdi:power-socket-eu
       - type: vertical-stack
         cards:
           - type: entities

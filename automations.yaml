@@ -407,6 +407,9 @@
   - data:
       entity_id: switch.tuin_verlichting
     service: switch.turn_off
+  - data:
+      entity_id: switch.tuin_verlichting_2
+    service: switch.turn_off
 - id: '1547662845811'
   alias: Licht tuin aan wanneer zon onder
   trigger:
