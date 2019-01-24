@@ -347,7 +347,7 @@
   action:
   - data:
       entity_id: media_player.googlehome5965
-      message: De droger is klaar, hop naar boven en opvouwen
+      message: De droger is klaar, hop naar boven en opvouwen maar
     service: tts.google_say
 - id: '1545660750751'
   alias: Notificatie wanneer kachel aan en dakraam open
