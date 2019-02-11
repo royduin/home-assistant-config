@@ -418,5 +418,5 @@
   condition: []
   action:
   - data:
-      entity_id: switch.tuin_verlichting
+      entity_id: switch.tuin_verlichting_2
     service: switch.turn_on
