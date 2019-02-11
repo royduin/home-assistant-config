@@ -117,59 +117,6 @@ views:
           - climate.woonkamer
           - sensor.temperature_158d00027308f7
           - sensor.temperature_158d000272fed0
-  - path: alarm
-    icon: mdi:bell
-    title: Alarm
-    cards:
-      - type: alarm-panel
-        entity: alarm_control_panel.ha_alarm
-      - type: vertical-stack
-        cards:
-        - type: entities
-          entities:
-            - entity: binary_sensor.door_window_sensor_158d00022daba6
-              icon: mdi:door
-            - entity: binary_sensor.door_window_sensor_158d0002518b9d
-              icon: mdi:door
-            - entity: binary_sensor.door_window_sensor_158d00027502b6
-              icon: mdi:window-closed
-            - entity: binary_sensor.door_window_sensor_158d0002bf9d5c
-              icon: mdi:window-closed
-            - entity: binary_sensor.door_window_sensor_158d0002434bb7
-              icon: mdi:window-closed
-        - type: entities
-          entities:
-            - binary_sensor.motion_sensor_158d0002b48e7e
-            - binary_sensor.motion_sensor_158d0002b5d5d1
-            - binary_sensor.motion_sensor_158d0002b4331f
-        - type: entities
-          entities:
-            - binary_sensor.water_leak_sensor_158d00023a4bcf
-  - path: multimedia
-    icon: mdi:youtube-tv
-    title: Multimedia
-    badges:
-      - sensor.plex_home
-      - sensor.plex_server
-    cards:
-      - type: media-control
-        entity: media_player.chromecast_rm
-      - type: media-control
-        entity: media_player.googlehome5965
-      - type: media-control
-        entity: media_player.batcave
-  - path: batterijen
-    icon: mdi:battery
-    title: Batterijen
-    cards:
-      - type: entities
-        entities:
-          - entity: sensor.tradfri_remote_control
-            name: Afstandsbediening bank
-            icon: mdi:remote
-          - entity: sensor.schakelaar_tuin
-            name: Afstandsbediening tuin
-            icon: mdi:remote
   - path: schoonmaak
     icon: mdi:broom
     title: Schoonmaak
@@ -201,28 +148,34 @@ views:
               green: 0
               yellow: 1000
               red: 3000
-  - path: lokatie
-    icon: mdi:map-marker
-    title: Lokatie
+  - path: alarm
+    icon: mdi:bell
+    title: Alarm
     cards:
-      - type: glance
-        entities:
-        - device_tracker.google_maps_109661945099680068664
-        - device_tracker.google_maps_117696366411650505303
-      - type: map
-        entities:
-        - device_tracker.google_maps_109661945099680068664
-        - device_tracker.google_maps_117696366411650505303
-        default_zoom: 12
-  - path: weer
-    icon: mdi:weather-cloudy
-    title: weer
-    badges:
-      - sun.sun
-      - sensor.br_symbol
-    cards:
-      - type: weather-forecast
-        entity: weather.br_unknown_station
+      - type: alarm-panel
+        entity: alarm_control_panel.ha_alarm
+      - type: vertical-stack
+        cards:
+        - type: entities
+          entities:
+            - entity: binary_sensor.door_window_sensor_158d00022daba6
+              icon: mdi:door
+            - entity: binary_sensor.door_window_sensor_158d0002518b9d
+              icon: mdi:door
+            - entity: binary_sensor.door_window_sensor_158d00027502b6
+              icon: mdi:window-closed
+            - entity: binary_sensor.door_window_sensor_158d0002bf9d5c
+              icon: mdi:window-closed
+            - entity: binary_sensor.door_window_sensor_158d0002434bb7
+              icon: mdi:window-closed
+        - type: entities
+          entities:
+            - binary_sensor.motion_sensor_158d0002b48e7e
+            - binary_sensor.motion_sensor_158d0002b5d5d1
+            - binary_sensor.motion_sensor_158d0002b4331f
+        - type: entities
+          entities:
+            - binary_sensor.water_leak_sensor_158d00023a4bcf
   - path: planten
     icon: mdi:flower
     title: Planten
@@ -238,6 +191,53 @@ views:
           - type: plant-status
             entity: plant.plant_3
             name: Plant voorraam
+  - path: lokatie
+    icon: mdi:map-marker
+    title: Lokatie
+    cards:
+      - type: glance
+        entities:
+        - device_tracker.google_maps_109661945099680068664
+        - device_tracker.google_maps_117696366411650505303
+      - type: map
+        entities:
+        - device_tracker.google_maps_109661945099680068664
+        - device_tracker.google_maps_117696366411650505303
+        default_zoom: 12
+  - path: multimedia
+    icon: mdi:youtube-tv
+    title: Multimedia
+    badges:
+      - sensor.plex_home
+      - sensor.plex_server
+    cards:
+      - type: media-control
+        entity: media_player.chromecast_rm
+      - type: media-control
+        entity: media_player.googlehome5965
+      - type: media-control
+        entity: media_player.batcave
+  - path: batterijen
+    icon: mdi:battery
+    title: Batterijen
+    cards:
+      - type: entities
+        entities:
+          - entity: sensor.tradfri_remote_control
+            name: Afstandsbediening bank
+            icon: mdi:remote
+          - entity: sensor.schakelaar_tuin
+            name: Afstandsbediening tuin
+            icon: mdi:remote
+  - path: weer
+    icon: mdi:weather-cloudy
+    title: weer
+    badges:
+      - sun.sun
+      - sensor.br_symbol
+    cards:
+      - type: weather-forecast
+        entity: weather.br_unknown_station
   - path: floorplan
     icon: mdi:floor-plan
     title: Floorplan
