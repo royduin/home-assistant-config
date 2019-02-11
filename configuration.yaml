@@ -275,7 +275,7 @@ weather:
 # Alarm
 alarm_control_panel:
   - platform: manual
-    code: 1234
+    name: Alarm
 
 # Switch
 switch:

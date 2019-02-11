@@ -157,7 +157,7 @@ views:
     title: Alarm
     cards:
       - type: alarm-panel
-        entity: alarm_control_panel.ha_alarm
+        entity: alarm_control_panel.alarm
       - type: vertical-stack
         cards:
         - type: entities
