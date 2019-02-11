@@ -8,3 +8,24 @@
       - 23200
       - 26000
     service: vacuum.send_command
+'1549895117036':
+  alias: Berta terug onder de bank en opladen
+  sequence:
+  - data:
+      entity_id: vacuum.berta
+    service: vacuum.xiaomi_remote_control_start
+  - delay: 00:00:08
+  - data:
+      duration: '7000'
+      entity_id: vacuum.berta
+      rotation: '0'
+      velocity: '0.29'
+    service: vacuum.xiaomi_remote_control_move
+  - delay: 00:00:09
+  - data:
+      entity_id: vacuum.berta
+    service: vacuum.xiaomi_remote_control_stop
+  - delay: 00:00:01
+  - data:
+      entity_id: vacuum.berta
+    service: vacuum.return_to_base

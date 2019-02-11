@@ -121,33 +121,37 @@ views:
     icon: mdi:broom
     title: Schoonmaak
     cards:
-      - type: entities
-        entities:
-          - vacuum.berta
-          - entity: script.1546891798335
-            icon: mdi:delete-restore
-          - entity: switch.wasmachine
-            icon: mdi:washing-machine
-          - entity: switch.droger
-            icon: mdi:tumble-dryer
-      - type: horizontal-stack
+      - type: vertical-stack
         cards:
-          - type: gauge
-            entity: sensor.wasmachine_watts
-            title: Wasmachine
-            max: 3680
-            severity:
-              green: 0
-              yellow: 1000
-              red: 3000
-          - type: gauge
-            entity: sensor.droger_watts
-            title: Droger
-            max: 3680
-            severity:
-              green: 0
-              yellow: 1000
-              red: 3000
+        - type: entities
+          entities:
+            - vacuum.berta
+            - entity: script.1546891798335
+              icon: mdi:delete-restore
+            - entity: script.1549895117036
+              icon: mdi:sofa
+            - entity: switch.wasmachine
+              icon: mdi:washing-machine
+            - entity: switch.droger
+              icon: mdi:tumble-dryer
+        - type: horizontal-stack
+          cards:
+            - type: gauge
+              entity: sensor.wasmachine_watts
+              title: Wasmachine
+              max: 3680
+              severity:
+                green: 0
+                yellow: 1000
+                red: 3000
+            - type: gauge
+              entity: sensor.droger_watts
+              title: Droger
+              max: 3680
+              severity:
+                green: 0
+                yellow: 1000
+                red: 3000
   - path: alarm
     icon: mdi:bell
     title: Alarm
