@@ -388,10 +388,10 @@
       title: Badkamer raam staat nog open
     service: notify.notify
 - id: '1546972884752'
-  alias: Standaard thema
+  alias: Thema donker wanneer zon onder
   trigger:
-  - event: start
-    platform: homeassistant
+  - event: sunset
+    platform: sun
   condition: []
   action:
   - data:
@@ -420,3 +420,25 @@
   - data:
       entity_id: switch.tuin_verlichting_2
     service: switch.turn_on
+- id: '1549893402518'
+  alias: Thema licht wanneer zon opkomst
+  trigger:
+  - event: sunrise
+    platform: sun
+  condition: []
+  action:
+  - data:
+      name: default
+    service: frontend.set_theme
+- id: '1549894159465'
+  alias: Thema donker wanneer zon onder bij opstarten
+  trigger:
+  - event: start
+    platform: homeassistant
+  condition:
+  - after: sunset
+    condition: sun
+  action:
+  - data:
+      name: midnight
+    service: frontend.set_theme
