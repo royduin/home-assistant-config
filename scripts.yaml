@@ -2,11 +2,19 @@
   alias: Berta naar prullenbak
   sequence:
   - data:
+      entity_id: vacuum.berta
+    service: vacuum.start
+  - delay: 00:00:02
+  - data:
+      entity_id: vacuum.berta
+    service: vacuum.stop
+  - delay: 00:00:02
+  - data:
       command: app_goto_target
       entity_id: vacuum.berta
       params:
-      - 23200
-      - 26000
+      - 28500
+      - 30000
     service: vacuum.send_command
 '1549895117036':
   alias: Berta terug onder de bank en opladen
@@ -14,7 +22,7 @@
   - data:
       entity_id: vacuum.berta
     service: vacuum.xiaomi_remote_control_start
-  - delay: 00:00:08
+  - delay: 00:00:15
   - data:
       duration: '7000'
       entity_id: vacuum.berta
