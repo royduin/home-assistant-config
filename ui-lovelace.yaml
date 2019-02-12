@@ -130,6 +130,9 @@ views:
               icon: mdi:delete-restore
             - entity: script.1549895117036
               icon: mdi:sofa
+            - entity: script.1549991292833
+              icon: mdi:food-fork-drink
+            - type: divider
             - entity: switch.wasmachine
               icon: mdi:washing-machine
             - entity: switch.droger
