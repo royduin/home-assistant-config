@@ -114,7 +114,6 @@ views:
         entity: climate.woonkamer
       - type: entities
         entities:
-          - climate.woonkamer
           - sensor.temperature_158d00027308f7
           - sensor.temperature_158d000272fed0
   - path: schoonmaak
