@@ -442,3 +442,19 @@
   - data:
       name: midnight
     service: frontend.set_theme
+- id: '1550859027603'
+  alias: Notificatie wanneer de deurbel gaat
+  trigger:
+  - event_data:
+      entity_id: binary_sensor.vibration_158d0002b8c8cf
+      movement_type: vibrate
+    event_type: xiaomi_aqara.movement
+    platform: event
+  condition: []
+  action:
+  - data:
+      data:
+        url: zmninja://?mid=1
+      message: Er is aangebeld
+      title: Deurbel
+    service: notify.notify
