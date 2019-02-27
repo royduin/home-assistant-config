@@ -223,6 +223,21 @@ views:
         entity: media_player.googlehome5965
       - type: media-control
         entity: media_player.batcave
+  - path: meterstanden
+    icon: mdi:flash
+    title: Meterstanden
+    cards:
+      - type: entities
+        entities:
+          - sensor.power_consumption
+          - sensor.gas_consumption
+          - sensor.power_consumption_normal
+          - sensor.power_consumption_low
+          - sensor.power_tariff
+          - sensor.long_power_failure_count
+      - type: history-graph
+        entities:
+          - sensor.power_consumption
   - path: batterijen
     icon: mdi:battery
     title: Batterijen

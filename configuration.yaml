@@ -198,6 +198,10 @@ sensor:
         friendly_name_template: "{{ states.switch.wasmachine.name}} vandaag"
         value_template: '{{ states.switch.wasmachine.attributes["today_energy_kwh"] | float }}'
         unit_of_measurement: 'kWh'
+  # DSMR
+  - platform: dsmr
+    port: /dev/ttyUSB0
+    dsmr_version: 5
 
 # Xiaomi Flower Care (also see the "sensor" configuration)
 plant:
