@@ -116,6 +116,7 @@ views:
         entities:
           - sensor.temperature_158d00027308f7
           - sensor.temperature_158d000272fed0
+          - sensor.cv_druk
   - path: schoonmaak
     icon: mdi:broom
     title: Schoonmaak
