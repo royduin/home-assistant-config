@@ -207,6 +207,7 @@ sensor:
     resource: !secret incomfort_data_url
     name: CV Druk
     device_class: pressure
+    unit_of_measurement: Bar
     value_template: '{{ (value_json.ch_pressure_lsb + value_json.ch_pressure_msb * 256) / 100 }}'
 
 # Xiaomi Flower Care (also see the "sensor" configuration)
