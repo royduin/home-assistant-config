@@ -20,6 +20,7 @@ I started with Home Assistant on my Ubuntu home server in August 2018 and moved 
   - 2 switches
   - 2 temperature sensors
   - 1 water sensor
+  - 1 vibration sensor
   - 1 magic cube
 - Asus RT-AC68U (presence detection)
 - ZoneMinder
