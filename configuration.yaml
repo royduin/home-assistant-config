@@ -219,7 +219,6 @@ plant:
       temperature: sensor.plant_1_temperature
       conductivity: sensor.plant_1_conductivity
       brightness: sensor.plant_1_light_intensity
-    min_moisture: 20
   plant_2:
     sensors:
       moisture: sensor.plant_2_moisture
@@ -227,7 +226,6 @@ plant:
       temperature: sensor.plant_2_temperature
       conductivity: sensor.plant_2_conductivity
       brightness: sensor.plant_2_light_intensity
-    min_moisture: 20
   plant_3:
     sensors:
       moisture: sensor.plant_3_moisture
@@ -235,7 +233,6 @@ plant:
       temperature: sensor.plant_3_temperature
       conductivity: sensor.plant_3_conductivity
       brightness: sensor.plant_3_light_intensity
-    min_moisture: 20
 
 # Light groups
 light:
