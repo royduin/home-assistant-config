@@ -291,16 +291,13 @@ alarm_control_panel:
   - platform: manual
     name: Alarm
 
-# Switch
-switch:
-  - platform: tplink
-    name: Droger
-    host: 192.168.1.7
-    enable_leds: false
-  - platform: tplink
-    name: Wasmachine
-    host: 192.168.1.8
-    enable_leds: false
+# TP-Link
+tplink:
+  switch:
+    # Droger
+    - host: 192.168.1.7
+    # Wasmachine
+    - host: 192.168.1.8
 
 group: !include groups.yaml
 automation: !include automations.yaml
