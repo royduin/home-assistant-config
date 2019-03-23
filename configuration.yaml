@@ -50,6 +50,11 @@ discovery:
 # Allows you to issue voice commands from the frontend in enabled browsers
 conversation:
 
+# MySQL instead of SQLite
+recorder:
+  db_url: !secret database
+  purge_keep_days: 3
+
 # Enables support for tracking state changes over time
 history:
 
