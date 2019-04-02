@@ -15,9 +15,6 @@ views:
             hours_to_show: 2
             entities:
               - camera.voor
-          - type: markdown
-            content: >
-              [Naar Zoneminder](http://home.royduineveld.nl/zm)
   - path: verlichting
     icon: mdi:lightbulb
     title: Verlichting

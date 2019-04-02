@@ -322,6 +322,13 @@ tplink:
     # Wasmachine
     - host: 192.168.1.8
 
+# Iframes
+panel_iframe:
+  router:
+    title: 'ZoneMinder'
+    url: !secret iframe_zoneminder
+    icon: mdi:cctv
+
 group: !include groups.yaml
 automation: !include automations.yaml
 script: !include scripts.yaml
