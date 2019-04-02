@@ -54,6 +54,27 @@ conversation:
 recorder:
   db_url: !secret database
   purge_keep_days: 3
+  # include:
+  #   domains:
+  #     - device_tracker
+  #     - light
+  #   entities:
+  #     - climate.woonkamer
+  #     - sensor.temperature_158d00027308f7
+  #     - sensor.temperature_158d000272fed0
+  #     - sensor.cv_druk
+  #     - sensor.wasmachine_watts
+  #     - sensor.droger_watts
+  #     - binary_sensor.door_window_sensor_158d00022daba6
+  #     - binary_sensor.door_window_sensor_158d0002518b9d
+  #     - binary_sensor.door_window_sensor_158d00027502b6
+  #     - binary_sensor.door_window_sensor_158d0002bf9d5c
+  #     - binary_sensor.door_window_sensor_158d0002434bb7
+  #     - binary_sensor.motion_sensor_158d0002b48e7e
+  #     - binary_sensor.motion_sensor_158d0002b5d5d1
+  #     - binary_sensor.motion_sensor_158d0002b4331f
+  #     - binary_sensor.water_leak_sensor_158d00023a4bcf
+  #     - sensor.power_consumption
 
 # Enables support for tracking state changes over time
 history:
