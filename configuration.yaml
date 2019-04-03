@@ -324,10 +324,14 @@ tplink:
 
 # Iframes
 panel_iframe:
-  router:
-    title: 'ZoneMinder'
+  zoneminder:
+    title: ZoneMinder
     url: !secret iframe_zoneminder
     icon: mdi:cctv
+  plex:
+    title: Plex
+    url: !secret iframe_plex
+    icon: mdi:plex
 
 group: !include groups.yaml
 automation: !include automations.yaml
