@@ -467,3 +467,13 @@
       message: Er is aangebeld
       title: Deurbel
     service: notify.notify
+- id: '1555260027207'
+  alias: Kachel uit om 2:00
+  trigger:
+  - at: 02:00:00
+    platform: time
+  condition: []
+  action:
+  - data:
+      temperature: 14
+    service: climate.set_temperature
