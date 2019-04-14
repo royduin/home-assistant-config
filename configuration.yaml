@@ -322,6 +322,30 @@ tplink:
     # Wasmachine
     - host: 192.168.1.8
 
+# Google Assistant
+google_assistant:
+  project_id: !secret google_assistant_project_id
+  api_key: !secret google_assistant_api_key
+  exposed_domains:
+    - switch
+    - light
+    - media_player
+    - climate
+    - vacuum
+  entity_config:
+    light.alles:
+      name: "Alle verlichting"
+    light.verlichting_batcave:
+      room: Mancave
+    light.verlichting_hal:
+      room: Hal
+    light.verlichting_zolder:
+      room: Zolder
+    vacuum.berta:
+      room: Woonkamer
+    light.gateway_light_7811dcded48c:
+      room: Keuken
+
 # Iframes
 panel_iframe:
   zoneminder:
