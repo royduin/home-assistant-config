@@ -261,6 +261,15 @@
       brightness: 254
       entity_id: light.slaapkamer
     service: light.turn_on
+  - data:
+      brightness: 254
+      entity_id: light.tradfri_light7e2145520440005e65551
+    service: light.turn_on
+  - delay: 00:15:00
+  - data:
+      brightness: 1
+      entity_id: light.tradfri_light7e2145520440005e65551
+    service: light.turn_on
 - id: '1542655741962'
   alias: Licht bank aan wanneer zon onder en niet thuis (B1)
   trigger:
