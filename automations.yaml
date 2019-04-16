@@ -477,3 +477,50 @@
   - data:
       temperature: 14
     service: climate.set_temperature
+- id: '1555441945603'
+  alias: Licht mancave uit klik switch
+  trigger:
+  - event_data:
+      click_type: single
+      entity_id: binary_sensor.switch_158d00026bae32
+    event_type: xiaomi_aqara.click
+    platform: event
+  condition:
+  - condition: state
+    entity_id: light.verlichting_batcave
+    state: 'on'
+  action:
+  - data:
+      entity_id: light.verlichting_batcave
+    service: light.turn_off
+- id: '1555442176287'
+  alias: Licht mancave aan klik switch (B1)
+  trigger:
+  - event_data:
+      click_type: single
+      entity_id: binary_sensor.switch_158d00026bae32
+    event_type: xiaomi_aqara.click
+    platform: event
+  condition:
+  - condition: state
+    entity_id: light.verlichting_batcave
+    state: 'off'
+  action:
+  - data:
+      brightness: 1
+      entity_id: light.verlichting_batcave
+    service: light.turn_on
+- id: '1555442256597'
+  alias: Licht mancave aan klik switch (B254)
+  trigger:
+  - event_data:
+      click_type: double
+      entity_id: binary_sensor.switch_158d00026bae32
+    event_type: xiaomi_aqara.click
+    platform: event
+  condition: []
+  action:
+  - data:
+      brightness: 254
+      entity_id: light.verlichting_batcave
+    service: light.turn_on
