@@ -524,3 +524,50 @@
       brightness: 254
       entity_id: light.verlichting_batcave
     service: light.turn_on
+- id: '1555526857177'
+  alias: Licht logeerkamer uit klik switch
+  trigger:
+  - event_data:
+      click_type: single
+      entity_id: binary_sensor.switch_158d00026bad37
+    event_type: xiaomi_aqara.click
+    platform: event
+  condition:
+  - condition: state
+    entity_id: light.logeerkamer
+    state: 'on'
+  action:
+  - data:
+      entity_id: light.logeerkamer
+    service: light.turn_off
+- id: '1555526929167'
+  alias: Licht logeerkamer aan klik switch (B1)
+  trigger:
+  - event_data:
+      click_type: single
+      entity_id: binary_sensor.switch_158d00026bad37
+    event_type: xiaomi_aqara.click
+    platform: event
+  condition:
+  - condition: state
+    entity_id: light.logeerkamer
+    state: 'off'
+  action:
+  - data:
+      brightness: 1
+      entity_id: light.logeerkamer
+    service: light.turn_on
+- id: '1555526972117'
+  alias: Licht logeerkamer aan klik switch (B254)
+  trigger:
+  - event_data:
+      click_type: double
+      entity_id: binary_sensor.switch_158d00026bad37
+    event_type: xiaomi_aqara.click
+    platform: event
+  condition: []
+  action:
+  - data:
+      brightness: 254
+      entity_id: light.logeerkamer
+    service: light.turn_on
