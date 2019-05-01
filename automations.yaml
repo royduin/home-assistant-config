@@ -571,3 +571,50 @@
       brightness: 254
       entity_id: light.logeerkamer
     service: light.turn_on
+- id: '1556460750673'
+  alias: Licht bank aan klik switch (B1)
+  trigger:
+  - event_data:
+      click_type: single
+      entity_id: binary_sensor.switch_158d0002556ad4
+    event_type: xiaomi_aqara.click
+    platform: event
+  condition:
+  - condition: state
+    entity_id: light.bank
+    state: 'off'
+  action:
+  - data:
+      brightness: 1
+      entity_id: light.bank
+    service: light.turn_on
+- id: '1556460800852'
+  alias: Licht bank aan klik switch (B254)
+  trigger:
+  - event_data:
+      click_type: double
+      entity_id: binary_sensor.switch_158d0002556ad4
+    event_type: xiaomi_aqara.click
+    platform: event
+  condition: []
+  action:
+  - data:
+      brightness: 254
+      entity_id: light.bank
+    service: light.turn_on
+- id: '1556460852768'
+  alias: Licht bank uit klik switch
+  trigger:
+  - event_data:
+      click_type: single
+      entity_id: binary_sensor.switch_158d0002556ad4
+    event_type: xiaomi_aqara.click
+    platform: event
+  condition:
+  - condition: state
+    entity_id: light.bank
+    state: 'on'
+  action:
+  - data:
+      entity_id: light.bank
+    service: light.turn_off

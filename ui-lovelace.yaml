@@ -27,6 +27,9 @@ views:
           - type: divider
           - entity: light.bank
             icon: mdi:sofa
+          - entity: light.verlichting_eettafel
+            name: Eettafel
+            icon: mdi:silverware-fork-knife
           - entity: light.verlichting_hal
             name: Hal
             icon: mdi:door
@@ -64,6 +67,14 @@ views:
             entities:
               - light.bank
               - light.gateway_light_7811dcded48c
+          - type: entities
+            title: Eettafel
+            show_header_toggle: false
+            entities:
+              - entity: light.verlichting_eettafel
+                name: Alle 2
+              - light.eettafel_1
+              - light.eettafel_2
           - type: entities
             title: Hal
             show_header_toggle: false

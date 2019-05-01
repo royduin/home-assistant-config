@@ -1,0 +1,172 @@
+automation:
+  - alias: Licht eettafel aan klik switch (B100)
+    trigger:
+      - platform: event
+        event_type: xiaomi_aqara.click
+        event_data:
+          entity_id: binary_sensor.switch_158d0002563086
+          click_type: single
+    condition:
+      - condition: state
+        entity_id: light.verlichting_eettafel
+        state: 'off'
+    action:
+      service: light.turn_on
+      entity_id: light.verlichting_eettafel
+      data:
+        brightness: 100
+        rgb_color: [255,171,88]
+
+  - alias: Licht eettafel aan dubbel klik switch (B254)
+    trigger:
+      - platform: event
+        event_type: xiaomi_aqara.click
+        event_data:
+          entity_id: binary_sensor.switch_158d0002563086
+          click_type: double
+    action:
+      - service: light.turn_on
+        entity_id: light.verlichting_eettafel
+        data:
+          brightness: 254
+          rgb_color: [255,171,88]
+      - service: input_boolean.turn_on
+        entity_id: input_boolean.licht_eettafel_dim
+
+  - alias: Licht eettafel uit klik switch
+    trigger:
+      - platform: event
+        event_type: xiaomi_aqara.click
+        event_data:
+          entity_id: binary_sensor.switch_158d0002563086
+          click_type: single
+    condition:
+      - condition: state
+        entity_id: light.verlichting_eettafel
+        state: 'on'
+    action:
+      service: light.turn_off
+      entity_id: light.verlichting_eettafel
+
+  - alias: Licht eettafel feller inhouden switch
+    initial_state: 'on'
+    trigger:
+      - platform: event
+        event_type: xiaomi_aqara.click
+        event_data:
+          entity_id: binary_sensor.switch_158d0002563086
+          click_type: long_click_press
+    condition:
+      condition: and
+      conditions:
+      - condition: state
+        entity_id: input_boolean.licht_eettafel_dim
+        state: 'off'
+      - condition: state
+        entity_id: light.verlichting_eettafel
+        state: 'on'
+    action:
+      - service: script.turn_on
+        entity_id: script.licht_eettafel_feller
+
+  - alias: Licht eettafel feller stoppen loslaten switch
+    initial_state: 'on'
+    trigger:
+      - platform: state
+        entity_id: binary_sensor.switch_158d0002563086
+        from: 'on'
+        to: 'off'
+    condition:
+      condition: and
+      conditions:
+      - condition: state
+        entity_id: input_boolean.licht_eettafel_dim
+        state: 'off'
+      - condition: state
+        entity_id: light.verlichting_eettafel
+        state: 'on'
+    action:
+      - service: input_boolean.turn_on
+        entity_id: input_boolean.licht_eettafel_dim
+
+  - alias: Licht eettafel dimmen inhouden switch
+    initial_state: 'on'
+    trigger:
+      - platform: event
+        event_type: xiaomi_aqara.click
+        event_data:
+          entity_id: binary_sensor.switch_158d0002563086
+          click_type: long_click_press
+    condition:
+      condition: and
+      conditions:
+      - condition: state
+        entity_id: input_boolean.licht_eettafel_dim
+        state: 'on'
+      - condition: state
+        entity_id: light.verlichting_eettafel
+        state: 'on'
+    action:
+      - service: script.turn_on
+        entity_id: script.licht_eettafel_dimmen
+
+  - alias: Licht eettafel dimmen stoppen loslaten switch
+    initial_state: 'on'
+    trigger:
+      - platform: state
+        entity_id: binary_sensor.switch_158d0002563086
+        from: 'on'
+        to: 'off'
+    condition:
+      condition: and
+      conditions:
+      - condition: state
+        entity_id: input_boolean.licht_eettafel_dim
+        state: 'on'
+      - condition: state
+        entity_id: light.verlichting_eettafel
+        state: 'on'
+    action:
+      - service: input_boolean.turn_off
+        entity_id: input_boolean.licht_eettafel_dim
+
+script:
+  licht_eettafel_dimmen:
+    sequence:
+      - condition: state
+        entity_id: input_boolean.licht_eettafel_dim
+        state: 'on'
+      - condition: template
+        value_template: '{{ states.light.verlichting_eettafel.attributes.brightness != 1 }}'
+      - service: light.turn_on
+        entity_id: light.verlichting_eettafel
+        data_template:
+          brightness: '{% if states.light.verlichting_eettafel.attributes.brightness - 50 < 1 %} 1 {% else %} {{states.light.verlichting_eettafel.attributes.brightness - 50}} {% endif %}'
+      - delay:
+          milliseconds: 50
+      - service: script.turn_off
+        entity_id: script.licht_eettafel_dimmen
+      - service: script.turn_on
+        entity_id: script.licht_eettafel_dimmen
+  licht_eettafel_feller:
+    sequence:
+      - condition: state
+        entity_id: input_boolean.licht_eettafel_dim
+        state: 'off'
+      - condition: template
+        value_template: '{{ states.light.verlichting_eettafel.attributes.brightness != 254 }}'
+      - service: light.turn_on
+        entity_id: light.verlichting_eettafel
+        data_template:
+          brightness: '{% if states.light.verlichting_eettafel.attributes.brightness + 50 > 254 %} 254 {% else %} {{states.light.verlichting_eettafel.attributes.brightness + 50}} {% endif %}'
+      - delay:
+          milliseconds: 50
+      - service: script.turn_off
+        entity_id: script.licht_eettafel_feller
+      - service: script.turn_on
+        entity_id: script.licht_eettafel_feller
+
+input_boolean:
+  licht_eettafel_dim:
+    name: Licht eettafel dim
+    initial: off

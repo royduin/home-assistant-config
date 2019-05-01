@@ -7,6 +7,7 @@
 !.gitignore
 !*.md
 !/custom_components/
+!/packages/
 
 # Ignore folders.
 .storage
