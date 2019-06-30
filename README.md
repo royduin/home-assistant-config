@@ -17,10 +17,10 @@ I started with Home Assistant on my Ubuntu home server in August 2018 and moved 
 - Xiaomi Hub
   - 5 door/window sensors
   - 3 motion sensors
-  - 2 switches
+  - 10 switches (build in the wall switches)
   - 2 temperature sensors
   - 1 water sensor
-  - 1 vibration sensor
+  - 1 vibration sensor (doorbell detection)
   - 1 magic cube
 - Asus RT-AC68U (presence detection)
 - ZoneMinder
@@ -34,7 +34,6 @@ I started with Home Assistant on my Ubuntu home server in August 2018 and moved 
 
 ## TODO
 
-### Software
 - Somehow add the Ikea plugs into the light group
 - Automations for the motion sensor at the stairs
 - Low battery notifications
@@ -44,7 +43,3 @@ I started with Home Assistant on my Ubuntu home server in August 2018 and moved 
 - Cloudflare integration
 - Alarm (home and away)
 - Home Cinema light modes
-
-### Hardware
-- All wall switches with pushbuttons and a Xiaomi switch inside (got another 8)
-- Replace the 2 lights above the dining table with the colored Ikea Trådfri lights
