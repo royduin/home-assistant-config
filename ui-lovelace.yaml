@@ -3,18 +3,14 @@ views:
   - path: home
     icon: mdi:home-assistant
     cards:
-      - type: vertical-stack
-        cards:
-          - type: picture-glance
-            camera_image: camera.voor
-            entities:
-              - camera.voor
-              - entity: binary_sensor.door_window_sensor_158d00022daba6
-                icon: mdi:door-open
-          - type: history-graph
-            hours_to_show: 2
-            entities:
-              - camera.voor
+      - type: picture-entity
+        entity: camera.voor
+        show_name: false
+        show_state: false
+      - type: picture-entity
+        entity: camera.tuin
+        show_name: false
+        show_state: false
   - path: verlichting
     icon: mdi:lightbulb
     title: Verlichting
