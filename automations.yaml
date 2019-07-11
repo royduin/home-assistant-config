@@ -426,7 +426,7 @@
     platform: sun
   condition: []
   action:
-  - data:
+  - data_template:
       entity_id: >
         {% if is_state('group.all_devices', 'home') %}
           switch.tuin_verlichting
