@@ -467,6 +467,10 @@
       message: Er is aangebeld
       title: Deurbel
     service: notify.notify
+  - data:
+      entity_id: media_player.googlehome5965
+      message: Ding dong, er is aangebeld
+    service: tts.google_say
 - id: '1555260027207'
   alias: Kachel uit om 2:00
   trigger:
