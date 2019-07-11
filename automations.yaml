@@ -427,7 +427,12 @@
   condition: []
   action:
   - data:
-      entity_id: switch.tuin_verlichting_2
+      entity_id: >
+        {% if is_state('group.all_devices', 'home') %}
+          switch.tuin_verlichting
+        {% else %}
+          switch.tuin_verlichting_2
+        {% endif %}
     service: switch.turn_on
 - id: '1549893402518'
   alias: Thema licht wanneer zon opkomst
