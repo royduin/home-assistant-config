@@ -365,6 +365,5 @@ panel_iframe:
     url: !secret iframe_plex
     icon: mdi:plex
 
-group: !include groups.yaml
 automation: !include automations.yaml
 script: !include scripts.yaml

@@ -1,7 +1,7 @@
 - id: licht-hal-aan-wanneer-donker-en-voordeuropen
   alias: Licht hal aan wanneer zon onder en voordeur open (B1)
   trigger:
-  - entity_id: binary_sensor.door_window_sensor_158d00022daba6
+  - entity_id: binary_sensor.door_window_sensor_voordeur
     from: 'off'
     platform: state
     to: 'on'
@@ -16,7 +16,7 @@
 - id: '1536696817398'
   alias: Licht hal uit 1 minuut na het sluiten van de deur en geen beweging
   trigger:
-  - entity_id: binary_sensor.door_window_sensor_158d00022daba6
+  - entity_id: binary_sensor.door_window_sensor_voordeur
     from: 'on'
     platform: state
     to: 'off'
@@ -27,7 +27,7 @@
   action:
   - delay: 00:01:00
   - condition: state
-    entity_id: binary_sensor.motion_sensor_158d0002b48e7e
+    entity_id: binary_sensor.motion_sensor_hal
     state: 'off'
   - alias: ''
     data:
@@ -42,7 +42,7 @@
   action:
   - data:
       brightness: 1
-      entity_id: light.tradfri_light7e2145520440005e65551
+      entity_id: light.tradfri_slaapkamer
     service: light.turn_on
 - id: '1538240383674'
   alias: Verlichting kast maximaal overdag
@@ -53,7 +53,7 @@
   action:
   - data:
       brightness: 254
-      entity_id: light.tradfri_light7e2145520440005e65551
+      entity_id: light.tradfri_slaapkamer
     service: light.turn_on
 - id: '1540227259824'
   alias: Kachel uit om 23:00
@@ -69,7 +69,7 @@
   alias: Licht hal aan klik switch (B254)
   trigger:
   - event_data:
-      entity_id: binary_sensor.switch_158d000128890e
+      entity_id: binary_sensor.switch_hal
     event_type: xiaomi_aqara.click
     platform: event
   condition:
@@ -91,7 +91,7 @@
   alias: Licht hal uit klik switch
   trigger:
   - event_data:
-      entity_id: binary_sensor.switch_158d000128890e
+      entity_id: binary_sensor.switch_hal
     event_type: xiaomi_aqara.click
     platform: event
   condition:
@@ -111,7 +111,7 @@
 - id: '1540324614249'
   alias: Licht hal aan wanneer donker overdag en beweging hal (B150)
   trigger:
-  - entity_id: binary_sensor.motion_sensor_158d0002b48e7e
+  - entity_id: binary_sensor.motion_sensor_hal
     from: 'off'
     platform: state
     to: 'on'
@@ -129,7 +129,7 @@
 - id: '1540395671321'
   alias: Licht hal aan wanneer zon onder en beweging hal (B1)
   trigger:
-  - entity_id: binary_sensor.motion_sensor_158d0002b48e7e
+  - entity_id: binary_sensor.motion_sensor_hal
     from: 'off'
     platform: state
     to: 'on'
@@ -159,13 +159,13 @@
 - id: '1540835022257'
   alias: Licht hal uit wanneer geen beweging meer en deur dicht
   trigger:
-  - entity_id: binary_sensor.motion_sensor_158d0002b48e7e
+  - entity_id: binary_sensor.motion_sensor_hal
     from: 'on'
     platform: state
     to: 'off'
   condition:
   - condition: state
-    entity_id: binary_sensor.door_window_sensor_158d00022daba6
+    entity_id: binary_sensor.door_window_sensor_voordeur
     state: 'off'
   action:
   - alias: ''
@@ -175,7 +175,7 @@
 - id: '1540843281679'
   alias: Notificatie wanneer wasmachine lekt
   trigger:
-  - entity_id: binary_sensor.water_leak_sensor_158d00023a4bcf
+  - entity_id: binary_sensor.water_leak_sensor_wasmachine
     from: 'off'
     platform: state
     to: 'on'
@@ -188,7 +188,7 @@
 - id: '1540843447189'
   alias: Notificatie wanneer voordeur open en niemand thuis
   trigger:
-  - entity_id: binary_sensor.door_window_sensor_158d00022daba6
+  - entity_id: binary_sensor.door_window_sensor_voordeur
     from: 'off'
     platform: state
     to: 'on'
@@ -219,7 +219,7 @@
   trigger:
   - event_data:
       click_type: single
-      entity_id: binary_sensor.switch_158d0001101f75
+      entity_id: binary_sensor.switch_slaapkamer
     event_type: xiaomi_aqara.click
     platform: event
   condition:
@@ -236,7 +236,7 @@
   trigger:
   - event_data:
       click_type: single
-      entity_id: binary_sensor.switch_158d0001101f75
+      entity_id: binary_sensor.switch_slaapkamer
     event_type: xiaomi_aqara.click
     platform: event
   condition:
@@ -252,7 +252,7 @@
   trigger:
   - event_data:
       click_type: double
-      entity_id: binary_sensor.switch_158d0001101f75
+      entity_id: binary_sensor.switch_slaapkamer
     event_type: xiaomi_aqara.click
     platform: event
   condition: []
@@ -263,12 +263,12 @@
     service: light.turn_on
   - data:
       brightness: 254
-      entity_id: light.tradfri_light7e2145520440005e65551
+      entity_id: light.tradfri_slaapkamer
     service: light.turn_on
   - delay: 00:15:00
   - data:
       brightness: 1
-      entity_id: light.tradfri_light7e2145520440005e65551
+      entity_id: light.tradfri_slaapkamer
     service: light.turn_on
 - id: '1542655741962'
   alias: Licht bank aan wanneer zon onder en niet thuis (B1)
@@ -311,7 +311,7 @@
 - id: '1542830579886'
   alias: Notificatie wanneer achterdeur open en niemand thuis
   trigger:
-  - entity_id: binary_sensor.door_window_sensor_158d0002518b9d
+  - entity_id: binary_sensor.door_window_sensor_achterdeur
     from: 'off'
     platform: state
     to: 'on'
@@ -366,7 +366,7 @@
     to: Verwarmen
   condition:
   - condition: state
-    entity_id: binary_sensor.door_window_sensor_158d0002bf9d5c
+    entity_id: binary_sensor.door_window_sensor_zolder
     state: 'on'
   - condition: template
     value_template: "{%- if states.climate.woonkamer.attributes[\"temperature\"] -%}\n\
@@ -385,7 +385,7 @@
     to: Verwarmen
   condition:
   - condition: state
-    entity_id: binary_sensor.door_window_sensor_158d00027502b6
+    entity_id: binary_sensor.door_window_sensor_badkamer
     state: 'on'
   - condition: template
     value_template: "{%- if states.climate.woonkamer.attributes[\"temperature\"] -%}\n\
@@ -460,7 +460,7 @@
   alias: Notificatie wanneer de deurbel gaat
   trigger:
   - event_data:
-      entity_id: binary_sensor.vibration_158d0002b8c8cf
+      entity_id: binary_sensor.vibration_deurbel
       movement_type: vibrate
     event_type: xiaomi_aqara.movement
     platform: event
@@ -491,7 +491,7 @@
   trigger:
   - event_data:
       click_type: single
-      entity_id: binary_sensor.switch_158d00026bae32
+      entity_id: binary_sensor.switch_mancave
     event_type: xiaomi_aqara.click
     platform: event
   condition:
@@ -507,7 +507,7 @@
   trigger:
   - event_data:
       click_type: single
-      entity_id: binary_sensor.switch_158d00026bae32
+      entity_id: binary_sensor.switch_mancave
     event_type: xiaomi_aqara.click
     platform: event
   condition:
@@ -524,7 +524,7 @@
   trigger:
   - event_data:
       click_type: double
-      entity_id: binary_sensor.switch_158d00026bae32
+      entity_id: binary_sensor.switch_mancave
     event_type: xiaomi_aqara.click
     platform: event
   condition: []
@@ -538,7 +538,7 @@
   trigger:
   - event_data:
       click_type: single
-      entity_id: binary_sensor.switch_158d00026bad37
+      entity_id: binary_sensor.switch_logeeerkamer
     event_type: xiaomi_aqara.click
     platform: event
   condition:
@@ -554,7 +554,7 @@
   trigger:
   - event_data:
       click_type: single
-      entity_id: binary_sensor.switch_158d00026bad37
+      entity_id: binary_sensor.switch_logeeerkamer
     event_type: xiaomi_aqara.click
     platform: event
   condition:
@@ -571,7 +571,7 @@
   trigger:
   - event_data:
       click_type: double
-      entity_id: binary_sensor.switch_158d00026bad37
+      entity_id: binary_sensor.switch_logeeerkamer
     event_type: xiaomi_aqara.click
     platform: event
   condition: []
@@ -585,7 +585,7 @@
   trigger:
   - event_data:
       click_type: single
-      entity_id: binary_sensor.switch_158d0002556ad4
+      entity_id: binary_sensor.switch_bank
     event_type: xiaomi_aqara.click
     platform: event
   condition:
@@ -602,7 +602,7 @@
   trigger:
   - event_data:
       click_type: double
-      entity_id: binary_sensor.switch_158d0002556ad4
+      entity_id: binary_sensor.switch_bank
     event_type: xiaomi_aqara.click
     platform: event
   condition: []
@@ -616,7 +616,7 @@
   trigger:
   - event_data:
       click_type: single
-      entity_id: binary_sensor.switch_158d0002556ad4
+      entity_id: binary_sensor.switch_bank
     event_type: xiaomi_aqara.click
     platform: event
   condition:

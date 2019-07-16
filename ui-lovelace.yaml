@@ -36,7 +36,7 @@ views:
           - entity: light.slaapkamer
             name: Slaapkamer
             icon: mdi:bed-empty
-          - entity: light.tradfri_light7e2145520440005e65551
+          - entity: light.kledingkast
             name: Kledingkast
             icon: mdi:tshirt-crew
           - entity: light.logeerkamer
@@ -89,7 +89,7 @@ views:
               - light.overloop
               - light.slaapkamer
               - light.logeerkamer
-              - light.tradfri_light7e2145520440005e65551
+              - light.kledingkast
       - type: vertical-stack
         cards:
           - type: entities
@@ -118,8 +118,8 @@ views:
         entity: climate.woonkamer
       - type: entities
         entities:
-          - sensor.temperature_158d00027308f7
-          - sensor.temperature_158d000272fed0
+          - sensor.temperature_slaapkamer
+          - sensor.temperature_mancave
           - sensor.cv_druk
   - path: schoonmaak
     icon: mdi:broom
@@ -169,24 +169,24 @@ views:
         cards:
         - type: entities
           entities:
-            - entity: binary_sensor.door_window_sensor_158d00022daba6
+            - entity: binary_sensor.door_window_sensor_voordeur
               icon: mdi:door
-            - entity: binary_sensor.door_window_sensor_158d0002518b9d
+            - entity: binary_sensor.door_window_sensor_achterdeur
               icon: mdi:door
-            - entity: binary_sensor.door_window_sensor_158d00027502b6
+            - entity: binary_sensor.door_window_sensor_badkamer
               icon: mdi:window-closed
-            - entity: binary_sensor.door_window_sensor_158d0002bf9d5c
+            - entity: binary_sensor.door_window_sensor_zolder
               icon: mdi:window-closed
-            - entity: binary_sensor.door_window_sensor_158d0002434bb7
+            - entity: binary_sensor.door_window_sensor_slaapkamer
               icon: mdi:window-closed
         - type: entities
           entities:
-            - binary_sensor.motion_sensor_158d0002b48e7e
-            - binary_sensor.motion_sensor_158d0002b5d5d1
-            - binary_sensor.motion_sensor_158d0002b4331f
+            - binary_sensor.motion_sensor_hal
+            - binary_sensor.motion_sensor_trap
+            - binary_sensor.motion_sensor_keuken
         - type: entities
           entities:
-            - binary_sensor.water_leak_sensor_158d00023a4bcf
+            - binary_sensor.water_leak_sensor_wasmachine
   - path: planten
     icon: mdi:flower
     title: Planten
