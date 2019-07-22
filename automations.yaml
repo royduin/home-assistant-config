@@ -65,49 +65,6 @@
   - data:
       temperature: 14
     service: climate.set_temperature
-- id: '1540237348340'
-  alias: Licht hal aan klik switch (B254)
-  trigger:
-  - event_data:
-      entity_id: binary_sensor.switch_hal
-    event_type: xiaomi_aqara.click
-    platform: event
-  condition:
-  - condition: state
-    entity_id: light.verlichting_hal
-    state: 'off'
-  action:
-  - data:
-      brightness: 254
-      entity_id: light.verlichting_hal
-    service: light.turn_on
-  - data:
-      entity_id: automation.licht_hal_aan_wanneer_donker_overdag_en_beweging_hal_b150,
-        automation.licht_hal_aan_wanneer_zon_onder_en_beweging_hal_b1, automation.licht_hal_aan_wanneer_zon_onder_en_voordeur_open_b1,
-        automation.licht_hal_uit_1_minuut_na_het_sluiten_van_de_deur_en_geen_beweging,
-        automation.licht_hal_uit_wanneer_geen_beweging_meer_en_deur_dicht
-    service: automation.turn_off
-- id: '1540237720547'
-  alias: Licht hal uit klik switch
-  trigger:
-  - event_data:
-      entity_id: binary_sensor.switch_hal
-    event_type: xiaomi_aqara.click
-    platform: event
-  condition:
-  - condition: state
-    entity_id: light.verlichting_hal
-    state: 'on'
-  action:
-  - data:
-      entity_id: light.verlichting_hal
-    service: light.turn_off
-  - data:
-      entity_id: automation.licht_hal_aan_wanneer_donker_overdag_en_beweging_hal_b150,
-        automation.licht_hal_aan_wanneer_zon_onder_en_beweging_hal_b1, automation.licht_hal_aan_wanneer_zon_onder_en_voordeur_open_b1,
-        automation.licht_hal_uit_1_minuut_na_het_sluiten_van_de_deur_en_geen_beweging,
-        automation.licht_hal_uit_wanneer_geen_beweging_meer_en_deur_dicht
-    service: automation.turn_on
 - id: '1540324614249'
   alias: Licht hal aan wanneer donker overdag en beweging hal (B150)
   trigger:
@@ -427,12 +384,8 @@
   condition: []
   action:
   - data_template:
-      entity_id: >
-        {% if is_state('group.all_devices', 'home') %}
-          switch.tuin_verlichting
-        {% else %}
-          switch.tuin_verlichting_2
-        {% endif %}
+      entity_id: "{% if is_state('group.all_devices', 'home') %}\n  switch.tuin_verlichting\n\
+        {% else %}\n  switch.tuin_verlichting_2\n{% endif %}\n"
     service: switch.turn_on
 - id: '1549893402518'
   alias: Thema licht wanneer zon opkomst
@@ -626,4 +579,26 @@
   action:
   - data:
       entity_id: light.bank
+    service: light.turn_off
+- id: '1563308661889'
+  alias: Licht overloop aan wanneer zon onder en beweging trap en hal (B1)
+  trigger:
+  - entity_id: binary_sensor.motion_sensor_trap
+    from: 'off'
+    platform: state
+    to: 'on'
+  condition:
+  - after: sunset
+    condition: sun
+  - condition: state
+    entity_id: binary_sensor.motion_sensor_hal
+    state: 'on'
+  action:
+  - data:
+      brightness: 1
+      entity_id: light.overloop
+    service: light.turn_on
+  - delay: 00:00:30
+  - data:
+      entity_id: light.overloop
     service: light.turn_off

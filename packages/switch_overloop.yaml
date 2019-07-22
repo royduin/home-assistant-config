@@ -1,0 +1,170 @@
+automation:
+  - alias: Licht overloop aan klik switch (B100)
+    trigger:
+      - platform: event
+        event_type: xiaomi_aqara.click
+        event_data:
+          entity_id: binary_sensor.switch_overloop
+          click_type: single
+    condition:
+      - condition: state
+        entity_id: light.overloop
+        state: 'off'
+    action:
+      service: light.turn_on
+      entity_id: light.overloop
+      data:
+        brightness: 100
+
+  - alias: Licht overloop aan dubbel klik switch (B254)
+    trigger:
+      - platform: event
+        event_type: xiaomi_aqara.click
+        event_data:
+          entity_id: binary_sensor.switch_overloop
+          click_type: double
+    action:
+      - service: light.turn_on
+        entity_id: light.overloop
+        data:
+          brightness: 254
+      - service: input_boolean.turn_on
+        entity_id: input_boolean.licht_overloop_dim
+
+  - alias: Licht overloop uit klik switch
+    trigger:
+      - platform: event
+        event_type: xiaomi_aqara.click
+        event_data:
+          entity_id: binary_sensor.switch_overloop
+          click_type: single
+    condition:
+      - condition: state
+        entity_id: light.overloop
+        state: 'on'
+    action:
+      service: light.turn_off
+      entity_id: light.overloop
+
+  - alias: Licht overloop feller inhouden switch
+    initial_state: 'on'
+    trigger:
+      - platform: event
+        event_type: xiaomi_aqara.click
+        event_data:
+          entity_id: binary_sensor.switch_overloop
+          click_type: long_click_press
+    condition:
+      condition: and
+      conditions:
+      - condition: state
+        entity_id: input_boolean.licht_overloop_dim
+        state: 'off'
+      - condition: state
+        entity_id: light.overloop
+        state: 'on'
+    action:
+      - service: script.turn_on
+        entity_id: script.licht_overloop_feller
+
+  - alias: Licht overloop feller stoppen loslaten switch
+    initial_state: 'on'
+    trigger:
+      - platform: state
+        entity_id: binary_sensor.switch_overloop
+        from: 'on'
+        to: 'off'
+    condition:
+      condition: and
+      conditions:
+      - condition: state
+        entity_id: input_boolean.licht_overloop_dim
+        state: 'off'
+      - condition: state
+        entity_id: light.overloop
+        state: 'on'
+    action:
+      - service: input_boolean.turn_on
+        entity_id: input_boolean.licht_overloop_dim
+
+  - alias: Licht overloop dimmen inhouden switch
+    initial_state: 'on'
+    trigger:
+      - platform: event
+        event_type: xiaomi_aqara.click
+        event_data:
+          entity_id: binary_sensor.switch_overloop
+          click_type: long_click_press
+    condition:
+      condition: and
+      conditions:
+      - condition: state
+        entity_id: input_boolean.licht_overloop_dim
+        state: 'on'
+      - condition: state
+        entity_id: light.overloop
+        state: 'on'
+    action:
+      - service: script.turn_on
+        entity_id: script.licht_overloop_dimmen
+
+  - alias: Licht overloop dimmen stoppen loslaten switch
+    initial_state: 'on'
+    trigger:
+      - platform: state
+        entity_id: binary_sensor.switch_overloop
+        from: 'on'
+        to: 'off'
+    condition:
+      condition: and
+      conditions:
+      - condition: state
+        entity_id: input_boolean.licht_overloop_dim
+        state: 'on'
+      - condition: state
+        entity_id: light.overloop
+        state: 'on'
+    action:
+      - service: input_boolean.turn_off
+        entity_id: input_boolean.licht_overloop_dim
+
+script:
+  licht_overloop_dimmen:
+    sequence:
+      - condition: state
+        entity_id: input_boolean.licht_overloop_dim
+        state: 'on'
+      - condition: template
+        value_template: '{{ states.light.overloop.attributes.brightness != 1 }}'
+      - service: light.turn_on
+        entity_id: light.overloop
+        data_template:
+          brightness: '{% if states.light.overloop.attributes.brightness - 50 < 1 %} 1 {% else %} {{states.light.overloop.attributes.brightness - 50}} {% endif %}'
+      - delay:
+          milliseconds: 50
+      - service: script.turn_off
+        entity_id: script.licht_overloop_dimmen
+      - service: script.turn_on
+        entity_id: script.licht_overloop_dimmen
+  licht_overloop_feller:
+    sequence:
+      - condition: state
+        entity_id: input_boolean.licht_overloop_dim
+        state: 'off'
+      - condition: template
+        value_template: '{{ states.light.overloop.attributes.brightness != 254 }}'
+      - service: light.turn_on
+        entity_id: light.overloop
+        data_template:
+          brightness: '{% if states.light.overloop.attributes.brightness + 50 > 254 %} 254 {% else %} {{states.light.overloop.attributes.brightness + 50}} {% endif %}'
+      - delay:
+          milliseconds: 50
+      - service: script.turn_off
+        entity_id: script.licht_overloop_feller
+      - service: script.turn_on
+        entity_id: script.licht_overloop_feller
+
+input_boolean:
+  licht_overloop_dim:
+    name: Licht overloop dim
+    initial: off

@@ -1,0 +1,33 @@
+automation:
+  - alias: Licht overloop aan klik switch (B100)
+    trigger:
+    - event_data:
+        click_type: single
+        entity_id: binary_sensor.switch_hal_overloop
+      event_type: xiaomi_aqara.click
+      platform: event
+    condition:
+    - condition: state
+      entity_id: light.overloop
+      state: 'off'
+    action:
+    - data:
+        brightness: 100
+        entity_id: light.overloop
+      service: light.turn_on
+
+  - alias: Licht overloop uit klik switch
+    trigger:
+    - event_data:
+        click_type: single
+        entity_id: binary_sensor.switch_hal_overloop
+      event_type: xiaomi_aqara.click
+      platform: event
+    condition:
+    - condition: state
+      entity_id: light.overloop
+      state: 'on'
+    action:
+    - data:
+        entity_id: light.overloop
+      service: light.turn_off

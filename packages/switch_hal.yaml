@@ -1,0 +1,58 @@
+automation:
+  - alias: Google home melding klik switch hal
+    trigger:
+    - event_data:
+        click_type: single
+        entity_id: binary_sensor.switch_hal
+      event_type: xiaomi_aqara.click
+      platform: event
+    action:
+    - data:
+        entity_id: media_player.googlehome5965
+        message: Gaat automatisch
+      service: tts.google_say
+
+  - alias: Licht hal aan dubbel klik switch (B254)
+    trigger:
+    - event_data:
+        click_type: double
+        entity_id: binary_sensor.switch_hal
+      event_type: xiaomi_aqara.click
+      platform: event
+    condition:
+    - condition: state
+      entity_id: light.verlichting_hal
+      state: 'off'
+    action:
+    - data:
+        brightness: 254
+        entity_id: light.verlichting_hal
+      service: light.turn_on
+    - data:
+        entity_id: automation.licht_hal_aan_wanneer_donker_overdag_en_beweging_hal_b150,
+          automation.licht_hal_aan_wanneer_zon_onder_en_beweging_hal_b1, automation.licht_hal_aan_wanneer_zon_onder_en_voordeur_open_b1,
+          automation.licht_hal_uit_1_minuut_na_het_sluiten_van_de_deur_en_geen_beweging,
+          automation.licht_hal_uit_wanneer_geen_beweging_meer_en_deur_dicht
+      service: automation.turn_off
+
+  - alias: Licht hal uit dubbel klik switch
+    trigger:
+    - event_data:
+        click_type: double
+        entity_id: binary_sensor.switch_hal
+      event_type: xiaomi_aqara.click
+      platform: event
+    condition:
+    - condition: state
+      entity_id: light.verlichting_hal
+      state: 'on'
+    action:
+    - data:
+        entity_id: light.verlichting_hal
+      service: light.turn_off
+    - data:
+        entity_id: automation.licht_hal_aan_wanneer_donker_overdag_en_beweging_hal_b150,
+          automation.licht_hal_aan_wanneer_zon_onder_en_beweging_hal_b1, automation.licht_hal_aan_wanneer_zon_onder_en_voordeur_open_b1,
+          automation.licht_hal_uit_1_minuut_na_het_sluiten_van_de_deur_en_geen_beweging,
+          automation.licht_hal_uit_wanneer_geen_beweging_meer_en_deur_dicht
+      service: automation.turn_on

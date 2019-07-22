@@ -1,0 +1,132 @@
+automation:
+  - alias: Licht zolder aan klik switch (B100)
+    trigger:
+      - platform: event
+        event_type: xiaomi_aqara.click
+        event_data:
+          entity_id: binary_sensor.switch_overloop_zolder
+          click_type: single
+    condition:
+      - condition: state
+        entity_id: light.verlichting_zolder
+        state: 'off'
+    action:
+      service: light.turn_on
+      entity_id: light.verlichting_zolder
+      data:
+        brightness: 100
+
+  - alias: Licht zolder aan dubbel klik switch (B254)
+    trigger:
+      - platform: event
+        event_type: xiaomi_aqara.click
+        event_data:
+          entity_id: binary_sensor.switch_overloop_zolder
+          click_type: double
+    action:
+      - service: light.turn_on
+        entity_id: light.verlichting_zolder
+        data:
+          brightness: 254
+      - service: input_boolean.turn_on
+        entity_id: input_boolean.licht_zolder_dim
+
+  - alias: Licht zolder uit klik switch
+    trigger:
+      - platform: event
+        event_type: xiaomi_aqara.click
+        event_data:
+          entity_id: binary_sensor.switch_overloop_zolder
+          click_type: single
+    condition:
+      - condition: state
+        entity_id: light.verlichting_zolder
+        state: 'on'
+    action:
+      service: light.turn_off
+      entity_id: light.verlichting_zolder
+
+  - alias: Licht zolder feller inhouden switch
+    initial_state: 'on'
+    trigger:
+      - platform: event
+        event_type: xiaomi_aqara.click
+        event_data:
+          entity_id: binary_sensor.switch_overloop_zolder
+          click_type: long_click_press
+    condition:
+      condition: and
+      conditions:
+      - condition: state
+        entity_id: input_boolean.licht_zolder_dim
+        state: 'off'
+      - condition: state
+        entity_id: light.verlichting_zolder
+        state: 'on'
+    action:
+      - service: script.turn_on
+        entity_id: script.licht_zolder_feller
+
+  - alias: Licht zolder feller stoppen loslaten switch
+    initial_state: 'on'
+    trigger:
+      - platform: state
+        entity_id: binary_sensor.switch_overloop_zolder
+        from: 'on'
+        to: 'off'
+    condition:
+      condition: and
+      conditions:
+      - condition: state
+        entity_id: input_boolean.licht_zolder_dim
+        state: 'off'
+      - condition: state
+        entity_id: light.verlichting_zolder
+        state: 'on'
+    action:
+      - service: input_boolean.turn_on
+        entity_id: input_boolean.licht_zolder_dim
+
+  - alias: Licht zolder dimmen inhouden switch
+    initial_state: 'on'
+    trigger:
+      - platform: event
+        event_type: xiaomi_aqara.click
+        event_data:
+          entity_id: binary_sensor.switch_overloop_zolder
+          click_type: long_click_press
+    condition:
+      condition: and
+      conditions:
+      - condition: state
+        entity_id: input_boolean.licht_zolder_dim
+        state: 'on'
+      - condition: state
+        entity_id: light.verlichting_zolder
+        state: 'on'
+    action:
+      - service: script.turn_on
+        entity_id: script.licht_zolder_dimmen
+
+  - alias: Licht zolder dimmen stoppen loslaten switch
+    initial_state: 'on'
+    trigger:
+      - platform: state
+        entity_id: binary_sensor.switch_overloop_zolder
+        from: 'on'
+        to: 'off'
+    condition:
+      condition: and
+      conditions:
+      - condition: state
+        entity_id: input_boolean.licht_zolder_dim
+        state: 'on'
+      - condition: state
+        entity_id: light.verlichting_zolder
+        state: 'on'
+    action:
+      - service: input_boolean.turn_off
+        entity_id: input_boolean.licht_zolder_dim
+
+# The scripts and input boolean are already there
+# they are specified in "switch_zolder.yaml".
