@@ -491,7 +491,7 @@
   trigger:
   - event_data:
       click_type: single
-      entity_id: binary_sensor.switch_logeeerkamer
+      entity_id: binary_sensor.switch_logeerkamer
     event_type: xiaomi_aqara.click
     platform: event
   condition:
@@ -507,7 +507,7 @@
   trigger:
   - event_data:
       click_type: single
-      entity_id: binary_sensor.switch_logeeerkamer
+      entity_id: binary_sensor.switch_logeerkamer
     event_type: xiaomi_aqara.click
     platform: event
   condition:
@@ -524,7 +524,7 @@
   trigger:
   - event_data:
       click_type: double
-      entity_id: binary_sensor.switch_logeeerkamer
+      entity_id: binary_sensor.switch_logeerkamer
     event_type: xiaomi_aqara.click
     platform: event
   condition: []
