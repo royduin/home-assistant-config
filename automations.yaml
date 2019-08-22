@@ -602,3 +602,22 @@
   - data:
       entity_id: light.overloop
     service: light.turn_off
+- id: '1566499757020'
+  alias: Notificatie wanneer een raam open en zon onder
+  trigger:
+  - event: sunset
+    platform: sun
+  condition:
+    condition: or
+    conditions:
+    - condition: state
+      entity_id: binary_sensor.door_window_sensor_slaapkamer
+      state: 'on'
+    - condition: state
+      entity_id: binary_sensor.door_window_sensor_zolder
+      state: 'on'
+  action:
+  - data:
+      message: En de zon is onder...
+      title: Er staat nog een raam open
+    service: notify.notify
