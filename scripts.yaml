@@ -4,7 +4,7 @@
   - data:
       entity_id: vacuum.berta
     service: vacuum.start
-  - delay: 00:00:04
+  - delay: 00:00:10
   - data:
       entity_id: vacuum.berta
     service: vacuum.stop
@@ -43,7 +43,7 @@
   - data:
       entity_id: vacuum.berta
     service: vacuum.start
-  - delay: 00:00:04
+  - delay: 00:00:10
   - data:
       entity_id: vacuum.berta
     service: vacuum.stop
