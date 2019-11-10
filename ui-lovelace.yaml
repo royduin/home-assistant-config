@@ -50,8 +50,11 @@ views:
             name: Batcave
             icon: mdi:bat
           - type: divider
+          - entity: switch.voortuin
+            name: Voortuin
+            icon: mdi:flower-tulip
           - entity: switch.tuin_verlichting_2
-            name: Tuin
+            name: Achtertuin
             icon: mdi:flower
           - entity: switch.tuin_verlichting
             name: Stopcontacten
