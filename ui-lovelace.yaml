@@ -23,6 +23,9 @@ views:
           - type: divider
           - entity: light.bank
             icon: mdi:sofa
+          - entity: switch.kerstboom
+            name: Kerstboom
+            icon: mdi:pine-tree
           - entity: light.verlichting_eettafel
             name: Eettafel
             icon: mdi:silverware-fork-knife

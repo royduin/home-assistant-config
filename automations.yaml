@@ -379,6 +379,9 @@
   - data:
       entity_id: switch.voortuin
     service: switch.turn_off
+  - data:
+      entity_id: switch.kerstboom
+    service: switch.turn_off
 - id: '1547662845811'
   alias: Licht tuin aan wanneer zon onder
   trigger:
@@ -388,6 +391,9 @@
   action:
   - data:
       entity_id: switch.voortuin
+    service: switch.turn_on
+  - data:
+      entity_id: switch.kerstboom
     service: switch.turn_on
   - data_template:
       entity_id: "{% if is_state('group.all_devices', 'home') %}\n  switch.tuin_verlichting\n\
