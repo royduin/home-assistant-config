@@ -62,7 +62,14 @@ automation:
     - service: light.turn_on
       entity_id: light.verlichting_eettafel
       data_template:
-        brightness: 50
+        brightness: >
+          {% if states.light.verlichting_eettafel.attributes.brightness + (trigger.event.data.action_value | round()) > 254 %}
+            254
+          {% elif states.light.verlichting_eettafel.attributes.brightness + (trigger.event.data.action_value | round()) < 1 %}
+            1
+          {% else %}
+            {{ states.light.verlichting_eettafel.attributes.brightness + (trigger.event.data.action_value | round()) }}
+          {% endif %}
 
   - alias: Licht eettafel uit cube shake
     trigger:
