@@ -178,6 +178,12 @@ sensor:
   - platform: miflora
     name: plant 3
     mac: 'C4:7C:8D:67:3E:12'
+  - platform: miflora
+    name: plant 4
+    mac: 'C4:7C:8D:6A:9E:DB'
+  - platform: miflora
+    name: plant 5
+    mac: 'C4:7C:8D:6A:9F:98'
   # Droger
   - platform: template
     sensors:
@@ -245,6 +251,14 @@ plant:
       temperature: sensor.plant_1_temperature
       conductivity: sensor.plant_1_conductivity
       brightness: sensor.plant_1_light_intensity
+    min_moisture: 15
+    max_moisture: 65
+    min_conductivity: 350
+    max_conductivity: 1000
+    min_temperature: 12
+    max_temperature: 32
+    min_brightness: 800
+    max_brightness: 20000
   plant_2:
     sensors:
       moisture: sensor.plant_2_moisture
@@ -252,6 +266,14 @@ plant:
       temperature: sensor.plant_2_temperature
       conductivity: sensor.plant_2_conductivity
       brightness: sensor.plant_2_light_intensity
+    min_moisture: 15
+    max_moisture: 65
+    min_conductivity: 350
+    max_conductivity: 2000
+    min_temperature: 15
+    max_temperature: 32
+    min_brightness: 1500
+    max_brightness: 35000
   plant_3:
     sensors:
       moisture: sensor.plant_3_moisture
@@ -259,6 +281,44 @@ plant:
       temperature: sensor.plant_3_temperature
       conductivity: sensor.plant_3_conductivity
       brightness: sensor.plant_3_light_intensity
+    min_moisture: 15
+    max_moisture: 60
+    min_conductivity: 350
+    max_conductivity: 2000
+    min_temperature: 10
+    max_temperature: 32
+    min_brightness: 2000
+    max_brightness: 35000
+  plant_4:
+    sensors:
+      moisture: sensor.plant_4_moisture
+      battery: sensor.plant_4_battery
+      temperature: sensor.plant_4_temperature
+      conductivity: sensor.plant_4_conductivity
+      brightness: sensor.plant_4_light_intensity
+    min_moisture: 15
+    max_moisture: 65
+    min_conductivity: 350
+    max_conductivity: 1000
+    min_temperature: 12
+    max_temperature: 32
+    min_brightness: 800
+    max_brightness: 20000
+  plant_5:
+    sensors:
+      moisture: sensor.plant_5_moisture
+      battery: sensor.plant_5_battery
+      temperature: sensor.plant_5_temperature
+      conductivity: sensor.plant_5_conductivity
+      brightness: sensor.plant_5_light_intensity
+    min_moisture: 15
+    max_moisture: 60
+    min_conductivity: 350
+    max_conductivity: 2000
+    min_temperature: 10
+    max_temperature: 35
+    min_brightness: 2000
+    max_brightness: 35000
 
 # Light groups
 light:

@@ -12,7 +12,7 @@ I started with Home Assistant on my Ubuntu home server in August 2018 and moved 
   - 6 GU10 white (803.652.70)
   - 1 closet lights hub (603.426.56)
   - 4 plugs (903.561.66)
-  - 1 plug with remote (403.647.48) 
+  - 1 plug with remote (403.647.48)
   - 1 remote (303.388.49)
 - Xiaomi Hub
   - 5 door/window sensors
@@ -27,7 +27,7 @@ I started with Home Assistant on my Ubuntu home server in August 2018 and moved 
   - 2 Hikvision cameras
 - Intergas InComfort (climate control)
 - My remote and local Plex servers
-- 3 Xiaomi Mi Flora
+- 5 Xiaomi Mi Flora
 - Google Home Mini
 - 2 TP-Link HS110 smart plugs
 - Xiaomi Vacuum

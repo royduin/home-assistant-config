@@ -201,13 +201,19 @@ views:
         cards:
           - type: plant-status
             entity: plant.plant_1
-            name: Plant hoek
+            name: Hoek (Calathea Insignis)
           - type: plant-status
             entity: plant.plant_2
-            name: Plant achterraam
+            name: Achterraam (Anthurium Andraeanum)
           - type: plant-status
             entity: plant.plant_3
-            name: Plant voorraam
+            name: Voortafel (Begonia Maculata Raddi)
+          - type: plant-status
+            entity: plant.plant_4
+            name: Eettafel (Calathea Stromata)
+          - type: plant-status
+            entity: plant.plant_5
+            name: Hal (Dypsis Lutescens)
   - path: lokatie
     icon: mdi:map-marker
     title: Lokatie
