@@ -25,6 +25,45 @@ automation:
       data_template:
         rgb_color: [0,0,255]
 
+  - alias: Licht eettafel normaal cube tap twice
+    trigger:
+    - event_data:
+        action_type: tap_twice
+        entity_id: binary_sensor.cube_158d00028f75a0_2
+      event_type: xiaomi_aqara.cube_action
+      platform: event
+    action:
+    - service: light.turn_on
+      entity_id: light.verlichting_eettafel
+      data_template:
+        rgb_color: [255,171,88]
+
+  - alias: Licht eettafel vel cube move
+    trigger:
+    - event_data:
+        action_type: move
+        entity_id: binary_sensor.cube_158d00028f75a0_2
+      event_type: xiaomi_aqara.cube_action
+      platform: event
+    action:
+    - service: light.turn_on
+      entity_id: light.verlichting_eettafel
+      data_template:
+        brightness: 255
+
+  - alias: Licht eettafel dimmen cube rotate
+    trigger:
+    - event_data:
+        action_type: rotate
+        entity_id: binary_sensor.cube_158d00028f75a0_2
+      event_type: xiaomi_aqara.cube_action
+      platform: event
+    action:
+    - service: light.turn_on
+      entity_id: light.verlichting_eettafel
+      data_template:
+        brightness: 50
+
   - alias: Licht eettafel uit cube shake
     trigger:
     - event_data:
