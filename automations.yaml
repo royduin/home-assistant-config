@@ -654,7 +654,7 @@
 - id: '1576177935871'
   alias: Licht hal aan wanneer zon onder en beweging trap (B1)
   trigger:
-  - entity_id: binary_sensor.motion_sensor_hal
+  - entity_id: binary_sensor.motion_sensor_trap
     from: 'off'
     platform: state
     to: 'on'
