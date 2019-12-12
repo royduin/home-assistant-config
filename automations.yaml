@@ -633,3 +633,36 @@
       message: En de zon is onder...
       title: Er staat nog een raam open
     service: notify.notify
+- id: '1576177870290'
+  alias: Licht hal aan wanneer donker overdag en beweging trap (B150)
+  trigger:
+  - entity_id: binary_sensor.motion_sensor_trap
+    from: 'off'
+    platform: state
+    to: 'on'
+  condition:
+  - below: '10'
+    condition: numeric_state
+    entity_id: sensor.illumination_158d0002b48e7e
+  - before: sunset
+    condition: sun
+  action:
+  - data:
+      brightness: 150
+      entity_id: light.verlichting_hal
+    service: light.turn_on
+- id: '1576177935871'
+  alias: Licht hal aan wanneer zon onder en beweging trap (B1)
+  trigger:
+  - entity_id: binary_sensor.motion_sensor_hal
+    from: 'off'
+    platform: state
+    to: 'on'
+  condition:
+  - after: sunset
+    condition: sun
+  action:
+  - data:
+      brightness: 1
+      entity_id: light.verlichting_hal
+    service: light.turn_on

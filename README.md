@@ -35,7 +35,6 @@ I started with Home Assistant on my Ubuntu home server in August 2018 and moved 
 ## TODO
 
 - Somehow add the Ikea plugs into the light group
-- Automations for the motion sensor at the stairs
 - Low battery notifications
 - Vacation mode
 - Floorplan
