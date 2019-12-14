@@ -124,9 +124,15 @@ views:
         entity: climate.woonkamer
       - type: entities
         entities:
+          - sensor.temperature_woonkamer
           - sensor.temperature_slaapkamer
           - sensor.temperature_mancave
           - sensor.cv_druk
+      - type: entities
+        entities:
+          - sensor.humidity_woonkamer
+          - sensor.humidity_slaapkamer
+          - sensor.humidity_mancave
   - path: schoonmaak
     icon: mdi:broom
     title: Schoonmaak
@@ -181,9 +187,11 @@ views:
               icon: mdi:door
             - entity: binary_sensor.door_window_sensor_badkamer
               icon: mdi:window-closed
-            - entity: binary_sensor.door_window_sensor_zolder
+            - entity: binary_sensor.door_window_sensor_logeerkamer
               icon: mdi:window-closed
             - entity: binary_sensor.door_window_sensor_slaapkamer
+              icon: mdi:window-closed
+            - entity: binary_sensor.door_window_sensor_zolder
               icon: mdi:window-closed
         - type: entities
           entities:

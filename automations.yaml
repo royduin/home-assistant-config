@@ -623,6 +623,9 @@
     condition: or
     conditions:
     - condition: state
+      entity_id: binary_sensor.door_window_sensor_logeerkamer
+      state: 'on'
+    - condition: state
       entity_id: binary_sensor.door_window_sensor_slaapkamer
       state: 'on'
     - condition: state

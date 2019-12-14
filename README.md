@@ -15,10 +15,10 @@ I started with Home Assistant on my Ubuntu home server in August 2018 and moved 
   - 1 plug with remote (403.647.48)
   - 1 remote (303.388.49)
 - Xiaomi Hub
-  - 5 door/window sensors
+  - 6 door/window sensors
   - 3 motion sensors
   - 10 switches (build in the wall switches)
-  - 2 temperature sensors
+  - 3 temperature sensors
   - 1 water sensor
   - 1 vibration sensor (doorbell detection)
   - 1 magic cube
