@@ -23,9 +23,9 @@ views:
           - type: divider
           - entity: light.bank
             icon: mdi:sofa
-          - entity: switch.kerstboom
-            name: Kerstboom
-            icon: mdi:pine-tree
+          # - entity: switch.kerstboom
+          #   name: Kerstboom
+          #   icon: mdi:pine-tree
           - entity: light.verlichting_eettafel
             name: Eettafel
             icon: mdi:silverware-fork-knife
@@ -208,20 +208,20 @@ views:
       - type: vertical-stack
         cards:
           - type: plant-status
-            entity: plant.plant_1
-            name: Hoek (Calathea Insignis)
-          - type: plant-status
-            entity: plant.plant_2
-            name: Achterraam (Anthurium Andraeanum)
-          - type: plant-status
             entity: plant.plant_3
             name: Voortafel (Begonia Maculata Raddi)
+          - type: plant-status
+            entity: plant.plant_1
+            name: Hoek (Calathea Insignis)
           - type: plant-status
             entity: plant.plant_4
             name: Eettafel (Calathea Stromata)
           - type: plant-status
+            entity: plant.plant_2
+            name: Achterraam (Anthurium Andraeanum)
+          - type: plant-status
             entity: plant.plant_5
-            name: Hal (Dypsis Lutescens)
+            name: Achterraam (Senecio Serpens)
   - path: lokatie
     icon: mdi:map-marker
     title: Lokatie
