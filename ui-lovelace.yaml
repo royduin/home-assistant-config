@@ -201,6 +201,35 @@ views:
         - type: entities
           entities:
             - binary_sensor.water_leak_sensor_wasmachine
+  - path: jacuzzi
+    icon: mdi:pool
+    title: Jacuzzi
+    cards:
+      - type: vertical-stack
+        cards:
+        - type: entities
+          entities:
+            - entity: switch.jacuzzi
+              icon: mdi:power
+            - type: divider
+            - entity: sensor.jacuzzi_today_kwh
+              icon: mdi:flash
+            - entity: sensor.jacuzzi_today_kwh_euro
+              icon: mdi:currency-eur
+            - type: divider
+            - entity: sensor.jacuzzi_total_kwh
+              icon: mdi:flash
+            - entity: sensor.jacuzzi_total_kwh_euro
+              icon: mdi:currency-eur
+        - type: gauge
+          entity: sensor.jacuzzi_watts
+          title: Jacuzzi
+          max: 3680
+          severity:
+            green: 0
+            yellow: 1000
+            red: 3000
+
   - path: planten
     icon: mdi:flower
     title: Planten
@@ -256,9 +285,8 @@ views:
         entities:
           - sensor.power_consumption
           - sensor.gas_consumption
-          - sensor.power_consumption_normal
-          - sensor.power_consumption_low
-          - sensor.power_tariff
+          - entity: sensor.power_consumption_all
+            icon: mdi:flash
           - sensor.long_power_failure_count
       - type: history-graph
         entities:

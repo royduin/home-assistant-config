@@ -230,10 +230,48 @@ sensor:
         friendly_name_template: "{{ states.switch.wasmachine.name}} vandaag"
         value_template: '{{ states.switch.wasmachine.attributes["today_energy_kwh"] | float }}'
         unit_of_measurement: 'kWh'
+  # Jacuzzi
+  - platform: template
+    sensors:
+      jacuzzi_amps:
+        friendly_name_template: "{{ states.switch.jacuzzi.name}} amperage"
+        value_template: '{{ states.switch.jacuzzi.attributes["current_a"] | float }}'
+        unit_of_measurement: 'A'
+      jacuzzi_watts:
+        friendly_name_template: "{{ states.switch.jacuzzi.name}} wattage"
+        value_template: '{{ states.switch.jacuzzi.attributes["current_power_w"] | float }}'
+        unit_of_measurement: 'W'
+      jacuzzi_total_kwh:
+        friendly_name_template: "{{ states.switch.jacuzzi.name}} totaal"
+        value_template: '{{ states.switch.jacuzzi.attributes["total_energy_kwh"] | float }}'
+        unit_of_measurement: 'kWh'
+      jacuzzi_volts:
+        friendly_name_template: "{{ states.switch.jacuzzi.name}} voltage"
+        value_template: '{{ states.switch.jacuzzi.attributes["voltage"] | float }}'
+        unit_of_measurement: 'V'
+      jacuzzi_today_kwh:
+        friendly_name_template: "{{ states.switch.jacuzzi.name}} vandaag"
+        value_template: '{{ states.switch.jacuzzi.attributes["today_energy_kwh"] | float }}'
+        unit_of_measurement: 'kWh'
+      jacuzzi_today_kwh_euro:
+        friendly_name_template: "{{ states.switch.jacuzzi.name}} vandaag"
+        value_template: '{{ (states.switch.jacuzzi.attributes["today_energy_kwh"] | float * 0.22) | round(2) }}'
+        unit_of_measurement: 'euro'
+      jacuzzi_total_kwh_euro:
+        friendly_name_template: "{{ states.switch.jacuzzi.name}} totaal"
+        value_template: '{{ (states.switch.jacuzzi.attributes["total_energy_kwh"] | float * 0.22) | round(2) }}'
+        unit_of_measurement: 'euro'
   # DSMR
   - platform: dsmr
     port: /dev/ttyUSB0
     dsmr_version: 5
+  # Power Consumption merged
+  - platform: template
+    sensors:
+      power_consumption_all:
+        friendly_name: "Power Consumption (all)"
+        value_template: "{{ (states('sensor.power_consumption_normal') | float + states('sensor.power_consumption_low') | float) | round(3) }}"
+        unit_of_measurement: 'kWh'
   # CV Pressure
   - platform: rest
     resource: !secret incomfort_data_url
@@ -241,6 +279,32 @@ sensor:
     device_class: pressure
     unit_of_measurement: Bar
     value_template: '{{ (value_json.ch_pressure_lsb + value_json.ch_pressure_msb * 256) / 100 }}'
+
+utility_meter:
+  gas_monthly:
+    source: sensor.gas_consumption
+    cycle: monthly
+  gas_yearly:
+    source: sensor.gas_consumption
+    cycle: yearly
+  energy_monthly:
+    source: sensor.power_consumption_all
+    cycle: monthly
+  energy_yearly:
+    source: sensor.power_consumption_all
+    cycle: yearly
+  jacuzzi_daily:
+    source: sensor.jacuzzi_total_kwh
+    cycle: daily
+  jacuzzi_weekly:
+    source: sensor.jacuzzi_total_kwh
+    cycle: weekly
+  jacuzzi_monthly:
+    source: sensor.jacuzzi_total_kwh
+    cycle: monthly
+  jacuzzi_yearly:
+    source: sensor.jacuzzi_total_kwh
+    cycle: yearly
 
 # Xiaomi Flower Care (also see the "sensor" configuration)
 plant:
@@ -387,6 +451,8 @@ tplink:
     - host: 192.168.1.7
     # Wasmachine
     - host: 192.168.1.8
+    # Jacuzzi
+    - host: 192.168.1.9
 
 # Google Assistant
 google_assistant:
