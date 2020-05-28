@@ -124,13 +124,11 @@ views:
         entity: climate.woonkamer
       - type: entities
         entities:
-          - sensor.temperature_woonkamer
           - sensor.temperature_slaapkamer
           - sensor.temperature_mancave
           - sensor.cv_druk
       - type: entities
         entities:
-          - sensor.humidity_woonkamer
           - sensor.humidity_slaapkamer
           - sensor.humidity_mancave
   - path: schoonmaak
@@ -211,16 +209,23 @@ views:
           entities:
             - entity: switch.jacuzzi
               icon: mdi:power
+              name: Aan/uit
+            - entity: sensor.temperature_jacuzzi
+              name: Temperatuur
             - type: divider
             - entity: sensor.jacuzzi_today_kwh
               icon: mdi:flash
+              name: Verbruik vandaag
             - entity: sensor.jacuzzi_today_kwh_euro
               icon: mdi:currency-eur
+              name: Kosten vandaag
             - type: divider
             - entity: sensor.jacuzzi_total_kwh
               icon: mdi:flash
+              name: Verbruik totaal
             - entity: sensor.jacuzzi_total_kwh_euro
               icon: mdi:currency-eur
+              name: Kosten totaal
         - type: gauge
           entity: sensor.jacuzzi_watts
           title: Jacuzzi
