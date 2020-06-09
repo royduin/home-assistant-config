@@ -259,7 +259,7 @@ sensor:
         unit_of_measurement: 'euro'
       jacuzzi_total_kwh_euro:
         friendly_name_template: "{{ states.switch.jacuzzi.name}} totaal"
-        value_template: '{{ (states.switch.jacuzzi.attributes["total_energy_kwh"] | float * 0.22) | round(2) }}'
+        value_template: '{{ (states("sensor.jacuzzi_yearly") | float * 0.22) | round(2) }}'
         unit_of_measurement: 'euro'
   # DSMR
   - platform: dsmr

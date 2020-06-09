@@ -220,7 +220,7 @@ views:
               icon: mdi:currency-eur
               name: Kosten vandaag
             - type: divider
-            - entity: sensor.jacuzzi_total_kwh
+            - entity: sensor.jacuzzi_yearly
               icon: mdi:flash
               name: Verbruik totaal
             - entity: sensor.jacuzzi_total_kwh_euro
