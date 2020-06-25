@@ -243,7 +243,7 @@ sensor:
         unit_of_measurement: 'W'
       jacuzzi_total_kwh:
         friendly_name_template: "{{ states.switch.jacuzzi.name}} totaal"
-        value_template: '{{ states.switch.jacuzzi.attributes["total_energy_kwh"] | float + 190 }}'
+        value_template: '{{ states.switch.jacuzzi.attributes["total_energy_kwh"] | float + 190 | round(3) }}'
         unit_of_measurement: 'kWh'
       jacuzzi_volts:
         friendly_name_template: "{{ states.switch.jacuzzi.name}} voltage"

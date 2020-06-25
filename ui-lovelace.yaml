@@ -210,9 +210,50 @@ views:
             - entity: switch.jacuzzi
               icon: mdi:power
               name: Aan/uit
-            - entity: sensor.temperature_jacuzzi
-              name: Temperatuur
-            - type: divider
+            - entity: sensor.jacuzzi_last_measurement
+              name: Laatste meeting
+              icon: mdi:timer
+            - entity: sensor.jacuzzi_guidance
+              name: Tips
+              icon: mdi:comment-outline
+        - type: horizontal-stack
+          cards:
+          - type: gauge
+            entity: sensor.jacuzzi_watts
+            name: Wattage
+            max: 3680
+            severity:
+              green: 0
+              yellow: 1000
+              red: 3000
+          - type: gauge
+            entity: sensor.jacuzzi_temperature
+            name: Temperatuur
+            max: 50
+            severity:
+              green: 30
+              yellow: 5
+              red: 0
+        - type: horizontal-stack
+          cards:
+          - type: gauge
+            entity: sensor.jacuzzi_ph
+            name: pH
+            max: 10
+            severity:
+              green: 7.2
+              yellow: 6.6
+              red: 0
+          - type: gauge
+            entity: sensor.jacuzzi_orp
+            name: Chloor
+            max: 1000
+            severity:
+              green: 650
+              yellow: 400
+              red: 0
+        - type: entities
+          entities:
             - entity: sensor.jacuzzi_today_kwh
               icon: mdi:flash
               name: Verbruik vandaag
@@ -226,15 +267,6 @@ views:
             - entity: sensor.jacuzzi_total_kwh_euro
               icon: mdi:currency-eur
               name: Kosten totaal
-        - type: gauge
-          entity: sensor.jacuzzi_watts
-          title: Jacuzzi
-          max: 3680
-          severity:
-            green: 0
-            yellow: 1000
-            red: 3000
-
   - path: planten
     icon: mdi:flower
     title: Planten
