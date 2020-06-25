@@ -29,15 +29,15 @@ I started with Home Assistant on my Ubuntu home server in August 2018 and moved 
 - My remote and local Plex servers
 - 5 Xiaomi Mi Flora
 - Google Home Mini
-- 2 TP-Link HS110 smart plugs
+- 3 TP-Link HS110 smart plugs
 - Xiaomi Vacuum
+- Blue Connect
 
 ## TODO
 
 - Somehow add the Ikea plugs into the light group
 - Low battery notifications
 - Vacation mode
-- Floorplan
 - Hikvision tamper detection
 - Cloudflare integration
 - Alarm (home and away)
