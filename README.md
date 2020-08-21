@@ -32,6 +32,7 @@ I started with Home Assistant on my Ubuntu home server in August 2018 and moved 
 - 3 TP-Link HS110 smart plugs
 - Xiaomi Vacuum
 - Blue Connect
+- GoodWe inverter
 
 ## TODO
 

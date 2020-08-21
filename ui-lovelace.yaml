@@ -261,7 +261,7 @@ views:
               icon: mdi:currency-eur
               name: Kosten vandaag
             - type: divider
-            - entity: sensor.jacuzzi_yearly
+            - entity: sensor.jacuzzi_total_kwh
               icon: mdi:flash
               name: Verbruik totaal
             - entity: sensor.jacuzzi_total_kwh_euro
@@ -318,16 +318,56 @@ views:
     icon: mdi:flash
     title: Meterstanden
     cards:
-      - type: entities
-        entities:
-          - sensor.power_consumption
-          - sensor.gas_consumption
-          - entity: sensor.power_consumption_all
-            icon: mdi:flash
-          - sensor.long_power_failure_count
       - type: history-graph
         entities:
-          - sensor.power_consumption
+          - entity: sensor.power_consumption
+            name: Gebruik
+          - entity: sensor.pv_outputpower_kw
+            name: Opbrengst
+      - type: entities
+        entities:
+          - entity: sensor.power_consumption
+            name: Gebruik
+          - entity: sensor.power_production
+            name: Terugleveren
+      - type: entities
+        title: Zonnepanelen
+        show_header_toggle: false
+        entities:
+          - entity: sensor.pv_outputpower
+            icon: mdi:flash
+            name: Wattage
+          - entity: sensor.pv_volt
+            icon: mdi:flash
+            name: Voltage
+          - entity: sensor.pv_temperature
+            icon: mdi:thermometer
+            name: Temperatuur
+          - type: divider
+          - entity: sensor.pv_eday
+            icon: mdi:flash
+            name: Opbrengst vandaag
+          - entity: sensor.pv_iday
+            icon: mdi:currency-eur
+            name: Opbrengst vandaag
+          - entity: sensor.pv_etotal
+            icon: mdi:flash
+            name: Opbrengst totaal
+          - entity: sensor.pv_itotal
+            icon: mdi:currency-eur
+            name: Opbrengst totaal
+      - type: entities
+        title: Meterstanden
+        show_header_toggle: false
+        entities:
+          - entity: sensor.power_consumption_all
+            icon: mdi:flash
+            name: Energie gebruikt
+          - entity: sensor.power_production_all
+            icon: mdi:flash
+            name: Energie teruggeleverd
+          - entity: sensor.gas_consumption
+            name: Gas
   - path: batterijen
     icon: mdi:battery
     title: Batterijen

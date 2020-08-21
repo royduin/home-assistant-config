@@ -1,0 +1,8 @@
+{
+	"domain": "sems",
+	"name": "Goodwe SEMS API",
+	"documentation": "https://github.com/TimSoethout/goodwe-sems-home-assistant",
+	"dependencies": [],
+	"codeowners": ["@TimSoethout"],
+	"requirements": []
+}

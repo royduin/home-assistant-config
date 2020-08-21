@@ -243,7 +243,7 @@ sensor:
         unit_of_measurement: 'W'
       jacuzzi_total_kwh:
         friendly_name_template: "{{ states.switch.jacuzzi.name}} totaal"
-        value_template: '{{ states.switch.jacuzzi.attributes["total_energy_kwh"] | float + 190 | round(3) }}'
+        value_template: '{{ states.switch.jacuzzi.attributes["total_energy_kwh"] | float + 190 + 45 + 228 | round(3) }}'
         unit_of_measurement: 'kWh'
       jacuzzi_volts:
         friendly_name_template: "{{ states.switch.jacuzzi.name}} voltage"
@@ -259,18 +259,22 @@ sensor:
         unit_of_measurement: 'euro'
       jacuzzi_total_kwh_euro:
         friendly_name_template: "{{ states.switch.jacuzzi.name}} totaal"
-        value_template: '{{ (states("sensor.jacuzzi_yearly") | float * 0.22) | round(2) }}'
+        value_template: '{{ (states("sensor.jacuzzi_total_kwh") | float * 0.22) | round(2) }}'
         unit_of_measurement: 'euro'
   # DSMR
   - platform: dsmr
     port: /dev/ttyUSB0
     dsmr_version: 5
-  # Power Consumption merged
+  # Power consumption/production low/normal merged
   - platform: template
     sensors:
       power_consumption_all:
         friendly_name: "Power Consumption (all)"
         value_template: "{{ (states('sensor.power_consumption_normal') | float + states('sensor.power_consumption_low') | float) | round(3) }}"
+        unit_of_measurement: 'kWh'
+      power_production_all:
+        friendly_name: "Power production (all)"
+        value_template: "{{ (states('sensor.power_production_normal') | float + states('sensor.power_production_low') | float) | round(3) }}"
         unit_of_measurement: 'kWh'
   # CV Pressure
   - platform: rest
@@ -279,6 +283,46 @@ sensor:
     device_class: pressure
     unit_of_measurement: Bar
     value_template: '{{ (value_json.ch_pressure_lsb + value_json.ch_pressure_msb * 256) / 100 }}'
+  # GoodWe Inverter
+  - platform: sems
+    username: !secret sems_username
+    password: !secret sems_password
+    station_id: !secret sems_station
+    scan_interval: 60
+  - platform: template
+    sensors:
+      pv_outputpower:
+        value_template: '{{ states.sensor.sems_portal.attributes.outputpower }}'
+        unit_of_measurement: 'W'
+        friendly_name: "PV Power output"
+      pv_outputpower_kw:
+        value_template: '{{ states.sensor.sems_portal.attributes.outputpower / 1000 }}'
+        unit_of_measurement: 'kW'
+        friendly_name: "PV Power output kW"
+      pv_volt:
+        value_template: '{{ states.sensor.sems_portal.attributes.vpv1 }}'
+        unit_of_measurement: 'V'
+        friendly_name: "PV Volt"
+      pv_temperature:
+        value_template: '{{ states.sensor.sems_portal.attributes.tempperature }}'
+        unit_of_measurement: 'C'
+        friendly_name: "PV Temperature"
+      pv_eday:
+        value_template: '{{ states.sensor.sems_portal.attributes.eday }}'
+        unit_of_measurement: 'kWh'
+        friendly_name: "PV energy day"
+      pv_etotal:
+        value_template: '{{ states.sensor.sems_portal.attributes.etotal }}'
+        unit_of_measurement: 'kWh'
+        friendly_name: "PV energy total"
+      pv_iday:
+        value_template: '{{ states.sensor.sems_portal.attributes.iday | round(2) }}'
+        unit_of_measurement: 'euro'
+        friendly_name: "PV income day"
+      pv_itotal:
+        value_template: '{{ states.sensor.sems_portal.attributes.itotal | round(2) }}'
+        unit_of_measurement: 'euro'
+        friendly_name: "PV income total"
 
 utility_meter:
   gas_monthly:
@@ -293,18 +337,18 @@ utility_meter:
   energy_yearly:
     source: sensor.power_consumption_all
     cycle: yearly
-  jacuzzi_daily:
-    source: sensor.jacuzzi_total_kwh
-    cycle: daily
-  jacuzzi_weekly:
-    source: sensor.jacuzzi_total_kwh
-    cycle: weekly
-  jacuzzi_monthly:
-    source: sensor.jacuzzi_total_kwh
-    cycle: monthly
-  jacuzzi_yearly:
-    source: sensor.jacuzzi_total_kwh
-    cycle: yearly
+  # jacuzzi_daily:
+  #   source: sensor.jacuzzi_total_kwh
+  #   cycle: daily
+  # jacuzzi_weekly:
+  #   source: sensor.jacuzzi_total_kwh
+  #   cycle: weekly
+  # jacuzzi_monthly:
+  #   source: sensor.jacuzzi_total_kwh
+  #   cycle: monthly
+  # jacuzzi_yearly:
+  #   source: sensor.jacuzzi_total_kwh
+  #   cycle: yearly
 
 # Xiaomi Flower Care (also see the "sensor" configuration)
 plant:
@@ -482,6 +526,26 @@ google_assistant:
 
 # Iframes
 panel_iframe:
+  sabnzbd:
+    title: SABnzbd
+    url: !secret iframe_sabnzbd
+    icon: mdi:cloud-download
+  sonarr:
+    title: Sonarr
+    url: !secret iframe_sonarr
+    icon: mdi:download-network
+  radarr:
+    title: Radarr
+    url: !secret iframe_radarr
+    icon: mdi:download-network
+  portainer:
+    title: Portainer
+    url: !secret iframe_portainer
+    icon: mdi:docker
+  netdata:
+    title: Netdata
+    url: !secret iframe_netdata
+    icon: mdi:speedometer
   zoneminder:
     title: ZoneMinder
     url: !secret iframe_zoneminder
