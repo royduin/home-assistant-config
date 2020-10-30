@@ -1,0 +1,172 @@
+automation:
+  - alias: Licht bank aan klik switch (B100)
+    trigger:
+      - platform: event
+        event_type: xiaomi_aqara.click
+        event_data:
+          entity_id: binary_sensor.switch_bank
+          click_type: single
+    condition:
+      - condition: state
+        entity_id: light.bank
+        state: 'off'
+    action:
+      service: light.turn_on
+      entity_id: light.bank
+      data:
+        brightness: 100
+        color_temp: 352
+
+  - alias: Licht bank aan dubbel klik switch (B254)
+    trigger:
+      - platform: event
+        event_type: xiaomi_aqara.click
+        event_data:
+          entity_id: binary_sensor.switch_bank
+          click_type: double
+    action:
+      - service: light.turn_on
+        entity_id: light.bank
+        data:
+          brightness: 254
+          color_temp: 352
+      - service: input_boolean.turn_on
+        entity_id: input_boolean.licht_bank_dim
+
+  - alias: Licht bank uit klik switch
+    trigger:
+      - platform: event
+        event_type: xiaomi_aqara.click
+        event_data:
+          entity_id: binary_sensor.switch_bank
+          click_type: single
+    condition:
+      - condition: state
+        entity_id: light.bank
+        state: 'on'
+    action:
+      service: light.turn_off
+      entity_id: light.bank
+
+  - alias: Licht bank feller inhouden switch
+    initial_state: 'on'
+    trigger:
+      - platform: event
+        event_type: xiaomi_aqara.click
+        event_data:
+          entity_id: binary_sensor.switch_bank
+          click_type: long_click_press
+    condition:
+      condition: and
+      conditions:
+      - condition: state
+        entity_id: input_boolean.licht_bank_dim
+        state: 'off'
+      - condition: state
+        entity_id: light.bank
+        state: 'on'
+    action:
+      - service: script.turn_on
+        entity_id: script.licht_bank_feller
+
+  - alias: Licht bank feller stoppen loslaten switch
+    initial_state: 'on'
+    trigger:
+      - platform: state
+        entity_id: binary_sensor.switch_bank
+        from: 'on'
+        to: 'off'
+    condition:
+      condition: and
+      conditions:
+      - condition: state
+        entity_id: input_boolean.licht_bank_dim
+        state: 'off'
+      - condition: state
+        entity_id: light.bank
+        state: 'on'
+    action:
+      - service: input_boolean.turn_on
+        entity_id: input_boolean.licht_bank_dim
+
+  - alias: Licht bank dimmen inhouden switch
+    initial_state: 'on'
+    trigger:
+      - platform: event
+        event_type: xiaomi_aqara.click
+        event_data:
+          entity_id: binary_sensor.switch_bank
+          click_type: long_click_press
+    condition:
+      condition: and
+      conditions:
+      - condition: state
+        entity_id: input_boolean.licht_bank_dim
+        state: 'on'
+      - condition: state
+        entity_id: light.bank
+        state: 'on'
+    action:
+      - service: script.turn_on
+        entity_id: script.licht_bank_dimmen
+
+  - alias: Licht bank dimmen stoppen loslaten switch
+    initial_state: 'on'
+    trigger:
+      - platform: state
+        entity_id: binary_sensor.switch_bank
+        from: 'on'
+        to: 'off'
+    condition:
+      condition: and
+      conditions:
+      - condition: state
+        entity_id: input_boolean.licht_bank_dim
+        state: 'on'
+      - condition: state
+        entity_id: light.bank
+        state: 'on'
+    action:
+      - service: input_boolean.turn_off
+        entity_id: input_boolean.licht_bank_dim
+
+script:
+  licht_bank_dimmen:
+    sequence:
+      - condition: state
+        entity_id: input_boolean.licht_bank_dim
+        state: 'on'
+      - condition: template
+        value_template: '{{ states.light.bank.attributes.brightness != 1 }}'
+      - service: light.turn_on
+        entity_id: light.bank
+        data_template:
+          brightness: '{% if states.light.bank.attributes.brightness - 50 < 1 %} 1 {% else %} {{states.light.bank.attributes.brightness - 50}} {% endif %}'
+      - delay:
+          milliseconds: 50
+      - service: script.turn_off
+        entity_id: script.licht_bank_dimmen
+      - service: script.turn_on
+        entity_id: script.licht_bank_dimmen
+  licht_bank_feller:
+    sequence:
+      - condition: state
+        entity_id: input_boolean.licht_bank_dim
+        state: 'off'
+      - condition: template
+        value_template: '{{ states.light.bank.attributes.brightness != 254 }}'
+      - service: light.turn_on
+        entity_id: light.bank
+        data_template:
+          brightness: '{% if states.light.bank.attributes.brightness + 50 > 254 %} 254 {% else %} {{states.light.bank.attributes.brightness + 50}} {% endif %}'
+      - delay:
+          milliseconds: 50
+      - service: script.turn_off
+        entity_id: script.licht_bank_feller
+      - service: script.turn_on
+        entity_id: script.licht_bank_feller
+
+input_boolean:
+  licht_bank_dim:
+    name: Licht bank dim
+    initial: off
