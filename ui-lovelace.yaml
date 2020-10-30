@@ -124,11 +124,13 @@ views:
         entity: climate.woonkamer
       - type: entities
         entities:
+          - sensor.temperature_woonkamer
           - sensor.temperature_slaapkamer
           - sensor.temperature_mancave
           - sensor.cv_druk
       - type: entities
         entities:
+          - sensor.humidity_woonkamer
           - sensor.humidity_slaapkamer
           - sensor.humidity_mancave
   - path: schoonmaak
@@ -275,7 +277,7 @@ views:
         cards:
           - type: plant-status
             entity: plant.plant_3
-            name: Voortafel (Begonia Maculata Raddi)
+            name: Achterraam (Vetdingen)
           - type: plant-status
             entity: plant.plant_1
             name: Hoek (Calathea Insignis)
@@ -287,7 +289,7 @@ views:
             name: Achterraam (Begibua Rex Cultorum)
           - type: plant-status
             entity: plant.plant_5
-            name: Achterraam (Senecio Serpens)
+            name: Voorraam (Senecio Serpens)
   - path: lokatie
     icon: mdi:map-marker
     title: Lokatie
