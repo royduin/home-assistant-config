@@ -50,6 +50,10 @@ updater:
 # Allows you to issue voice commands from the frontend in enabled browsers
 conversation:
 
+stream:
+
+ffmpeg:
+
 # MySQL instead of SQLite
 recorder:
   db_url: !secret database
@@ -136,6 +140,9 @@ zoneminder:
   password: !secret zoneminder_password
 camera:
   - platform: zoneminder
+  - platform: generic
+    still_image_url: !secret camera_image
+    stream_source: !secret camera_stream
 
 climate:
   # InComfort

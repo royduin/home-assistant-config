@@ -295,7 +295,7 @@
       \ [\"last_triggered\"])) > 1800 }}\n{%- else -%}\n  True\n{%- endif -%}\n"
   action:
   - data:
-      entity_id: media_player.googlehome5965
+      entity_id: media_player.keuken
       message: De wasmachine is klaar, hop naar boven de droger in dus
     service: tts.google_say
 - id: '1545057524247'
@@ -312,7 +312,7 @@
       \ [\"last_triggered\"])) > 1800 }}\n{%- else -%}\n  True\n{%- endif -%}\n"
   action:
   - data:
-      entity_id: media_player.googlehome5965
+      entity_id: media_player.keuken
       message: De droger is klaar, hop naar boven en opvouwen maar
     service: tts.google_say
 - id: '1545660750751'
@@ -432,15 +432,19 @@
   condition: []
   action:
   - data:
+      entity_id: camera.generic_camera
+      media_player: media_player.keuken
+    service: camera.play_stream
+  - data:
       data:
         url: zmninja://?mid=1
       message: Er is aangebeld
       title: Deurbel
     service: notify.notify
+  - delay: '60'
   - data:
-      entity_id: media_player.googlehome5965
-      message: Ding, Dong, er is aangebeld
-    service: tts.google_say
+      entity_id: media_player.keuken
+    service: media_player.turn_off
 - id: '1555260027207'
   alias: Kachel uit om 2:00
   trigger:

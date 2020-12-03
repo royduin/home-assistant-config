@@ -311,9 +311,11 @@ views:
       - sensor.plex_server
     cards:
       - type: media-control
-        entity: media_player.chromecast_rm
+        entity: media_player.keuken
       - type: media-control
         entity: media_player.googlehome5965
+      - type: media-control
+        entity: media_player.chromecast_rm
       - type: media-control
         entity: media_player.batcave
   - path: meterstanden
