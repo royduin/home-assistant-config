@@ -644,3 +644,26 @@
   - data:
       entity_id: light.verlichting_hal
     service: light.turn_off
+- id: '1610828523789'
+  alias: Licht mancave uit wanneer film start
+  trigger:
+  - entity_id: media_player.batcave
+    platform: state
+    to: playing
+  condition: []
+  action:
+  - data:
+      entity_id: light.verlichting_batcave
+    service: light.turn_off
+- id: '1610828785656'
+  alias: Licht mancave aan wanneer film pauzeert (B1)
+  trigger:
+  - entity_id: media_player.batcave
+    platform: state
+    to: paused
+  condition: []
+  action:
+  - data:
+      brightness: 1
+      entity_id: light.muur
+    service: light.turn_on
