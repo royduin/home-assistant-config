@@ -432,7 +432,7 @@
   condition: []
   action:
   - data:
-      entity_id: camera.generic_camera
+      entity_id: camera.voor_2
       media_player: media_player.keuken
     service: camera.play_stream
   - data:

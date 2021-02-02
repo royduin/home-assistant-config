@@ -133,16 +133,29 @@ zone:
     longitude: !secret kapsalon_longitude
     icon: mdi:content-cut
 
-# ZoneMinder
-zoneminder:
-  host: !secret zoneminder_host
-  username: !secret zoneminder_username
-  password: !secret zoneminder_password
+# Cameras
 camera:
-  - platform: zoneminder
   - platform: generic
-    still_image_url: !secret camera_image
-    stream_source: !secret camera_stream
+    name: Voor
+    still_image_url: !secret camera_voor_image
+    stream_source: !secret camera_voor_stream
+    username: !secret camera_username
+    password: !secret camera_password
+    authentication: digest
+  - platform: generic
+    name: Tuin
+    still_image_url: !secret camera_tuin_image
+    stream_source: !secret camera_tuin_stream
+    username: !secret camera_username
+    password: !secret camera_password
+    authentication: digest
+  - platform: generic
+    name: Voor 2
+    still_image_url: !secret camera_voor2_image
+    stream_source: !secret camera_voor2_stream
+    username: !secret camera_username
+    password: !secret camera_password
+    authentication: digest
 
 climate:
   # InComfort
