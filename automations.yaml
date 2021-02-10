@@ -1,5 +1,5 @@
 - id: licht-hal-aan-wanneer-donker-en-voordeuropen
-  alias: Licht hal aan wanneer zon onder en voordeur open (B1)
+  alias: Licht hal aan wanneer zon onder en voordeur open (B2)
   trigger:
   - entity_id: binary_sensor.door_window_sensor_voordeur
     from: 'off'
@@ -10,7 +10,7 @@
     condition: sun
   action:
   - data:
-      brightness: 1
+      brightness: 2
       entity_id: light.verlichting_hal
     service: light.turn_on
 - id: '1536696817398'
@@ -41,7 +41,7 @@
   condition: []
   action:
   - data:
-      brightness: 1
+      brightness: 2
       entity_id: light.tradfri_slaapkamer
     service: light.turn_on
 - id: '1538240383674'
@@ -84,7 +84,7 @@
       entity_id: light.verlichting_hal
     service: light.turn_on
 - id: '1540395671321'
-  alias: Licht hal aan wanneer zon onder en beweging hal (B1)
+  alias: Licht hal aan wanneer zon onder en beweging hal (B2)
   trigger:
   - entity_id: binary_sensor.motion_sensor_hal
     from: 'off'
@@ -95,7 +95,7 @@
     condition: sun
   action:
   - data:
-      brightness: 1
+      brightness: 2
       entity_id: light.verlichting_hal
     service: light.turn_on
 - id: '1540458454993'
@@ -172,7 +172,7 @@
       temperature: 14
     service: climate.set_temperature
 - id: '1542568575113'
-  alias: Licht slaapkamer aan klik switch (B1)
+  alias: Licht slaapkamer aan klik switch (B2)
   trigger:
   - event_data:
       click_type: single
@@ -185,7 +185,7 @@
     state: 'off'
   action:
   - data:
-      brightness: 1
+      brightness: 2
       entity_id: light.slaapkamer
     service: light.turn_on
 - id: '1542568632003'
@@ -224,11 +224,11 @@
     service: light.turn_on
   - delay: 00:15:00
   - data:
-      brightness: 1
+      brightness: 2
       entity_id: light.tradfri_slaapkamer
     service: light.turn_on
 - id: '1542655741962'
-  alias: Licht bank aan wanneer zon onder en niet thuis (B1)
+  alias: Licht bank aan wanneer zon onder en niet thuis (B2)
   trigger:
   - event: sunset
     platform: sun
@@ -238,11 +238,11 @@
     state: not_home
   action:
   - data:
-      brightness: 1
+      brightness: 2
       entity_id: light.bank
     service: light.turn_on
 - id: '1542656422872'
-  alias: Licht bank aan wanneer we weg gaan en zon onder (B1)
+  alias: Licht bank aan wanneer we weg gaan en zon onder (B2)
   trigger:
   - entity_id: group.all_devices
     platform: state
@@ -252,7 +252,7 @@
     condition: sun
   action:
   - data:
-      brightness: 1
+      brightness: 2
       entity_id: light.bank
     service: light.turn_on
 - id: '1542657069365'
@@ -472,7 +472,7 @@
       entity_id: light.verlichting_batcave
     service: light.turn_off
 - id: '1555442176287'
-  alias: Licht mancave aan klik switch (B1)
+  alias: Licht mancave aan klik switch (B2)
   trigger:
   - event_data:
       click_type: single
@@ -485,7 +485,7 @@
     state: 'off'
   action:
   - data:
-      brightness: 1
+      brightness: 2
       entity_id: light.verlichting_batcave
     service: light.turn_on
 - id: '1555442256597'
@@ -519,7 +519,7 @@
       entity_id: light.logeerkamer
     service: light.turn_off
 - id: '1555526929167'
-  alias: Licht logeerkamer aan klik switch (B1)
+  alias: Licht logeerkamer aan klik switch (B2)
   trigger:
   - event_data:
       click_type: single
@@ -532,7 +532,7 @@
     state: 'off'
   action:
   - data:
-      brightness: 1
+      brightness: 2
       entity_id: light.logeerkamer
     service: light.turn_on
 - id: '1555526972117'
@@ -550,7 +550,7 @@
       entity_id: light.logeerkamer
     service: light.turn_on
 - id: '1563308661889'
-  alias: Licht overloop aan wanneer zon onder en beweging trap en hal (B1)
+  alias: Licht overloop aan wanneer zon onder en beweging trap en hal (B2)
   trigger:
   - entity_id: binary_sensor.motion_sensor_trap
     from: 'off'
@@ -564,7 +564,7 @@
     state: 'on'
   action:
   - data:
-      brightness: 1
+      brightness: 2
       entity_id: light.overloop
     service: light.turn_on
   - delay: 00:00:30
@@ -612,7 +612,7 @@
       entity_id: light.verlichting_hal
     service: light.turn_on
 - id: '1576177935871'
-  alias: Licht hal aan wanneer zon onder en beweging trap (B1)
+  alias: Licht hal aan wanneer zon onder en beweging trap (B2)
   trigger:
   - entity_id: binary_sensor.motion_sensor_trap
     from: 'off'
@@ -623,7 +623,7 @@
     condition: sun
   action:
   - data:
-      brightness: 1
+      brightness: 2
       entity_id: light.verlichting_hal
     service: light.turn_on
 - id: '1576326479753'
@@ -656,7 +656,7 @@
       entity_id: light.verlichting_batcave
     service: light.turn_off
 - id: '1610828785656'
-  alias: Licht mancave aan wanneer film pauzeert (B1)
+  alias: Licht mancave aan wanneer film pauzeert (B2)
   trigger:
   - entity_id: media_player.batcave
     platform: state
@@ -664,6 +664,6 @@
   condition: []
   action:
   - data:
-      brightness: 1
+      brightness: 2
       entity_id: light.muur
     service: light.turn_on
